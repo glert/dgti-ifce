@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import User.get_group_permissions.       
+from django.contrib.auth.models import Use
  
 class Sistema(models.Model):
     nome = models.CharField(max_length=128, unique=True)
