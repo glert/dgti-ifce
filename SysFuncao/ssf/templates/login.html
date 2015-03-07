@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load bootstrap_toolkit %}
+
+{% block content %}
+
+{% if c2 %}
+
+<script>
+window.onload = function() {
+	alert("Usuário ou Senha Inválida");
+}
+</script>
+
+{% endif %}
+
+  <center><h3>Sistema de Requisição de Funções</h3></center>
+
+  <center><form action="/accounts/auth/" method="post">{% csrf_token %}
+     <label for="username">Usuário:</label>
+     <input type="text" name="username" value="" id="username">
+     <label for="password">Senha:</label>
+     <input type="password" name="password" value="" id="password">
+    
+     <br><input type="submit" value="Acessar" class="btn btn-primary">
+  </form></center>
+
+{% endblock %}

@@ -121,6 +121,7 @@ ROOT_URLCONF = 'SysFuncao.urls'
 WSGI_APPLICATION = 'SysFuncao.wsgi.application'
 
 TEMPLATE_DIRS = (
+    '/home/nbook/git/dgti-ifce/SysFuncao/ssf/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -136,10 +137,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'bootstrap_toolkit',
     
     # Uncomment the next line to enable admin documentation:
 #    'django.contrib.admindocs',
     'requisitador',
+    'ssf',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
