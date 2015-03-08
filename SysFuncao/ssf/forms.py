@@ -82,33 +82,3 @@ class TestForm(forms.Form):
         raise forms.ValidationError("This error was added to show the non field errors styling.")
         return cleaned_data
 
-
-class TestModelForm(forms.ModelForm):
-    class Meta:
-        model = User
-
-
-class TestInlineForm(forms.Form):
-    query = forms.CharField(required=False, label="")
-    vegetable = forms.ChoiceField(
-        choices=(
-            ("broccoli", "Broccoli"),
-            ("carrots", "Carrots"),
-            ("turnips", "Turnips"),
-        ),
-    )
-    active = forms.ChoiceField(widget=forms.RadioSelect, label="", choices=(
-        ('all', 'all'),
-        ('active', 'active'),
-        ('inactive', 'inactive')
-        ), initial='all')
-    mine = forms.BooleanField(required=False, label='Mine only', initial=False)
-
-
-class WidgetsForm(forms.Form):
-    date = forms.DateField(widget=BootstrapDateInput)
-
-
-class FormSetInlineForm(forms.Form):
-    foo = forms.CharField()
-    bar = forms.CharField()
