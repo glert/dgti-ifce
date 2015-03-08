@@ -15,7 +15,7 @@ class TestForm(forms.Form):
         help_text=u'This is a text area',
         widget=forms.Textarea(
             attrs={
-                'title': 'I am "nice"',
+                'title': 'I am "nic"',
             }
         ),
     )
