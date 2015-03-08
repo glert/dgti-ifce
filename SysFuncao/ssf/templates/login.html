@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% if c2 %}
+{% if sms %}
 
 <script>
 window.onload = function() {
@@ -14,15 +14,17 @@ window.onload = function() {
 
 {% endif %}
 
+<center><div class="well" style="width: 50%;">
+ 
   <center><h3>Sistema de Requisição de Funções</h3></center>
 
-  <center><form action="/accounts/auth/" method="post">{% csrf_token %}
-     <label for="username">Usuário:</label>
-     <input type="text" name="username" value="" id="username">
-     <label for="password">Senha:</label>
-     <input type="password" name="password" value="" id="password">
+  <form class="form-horizontal" action="/accounts/auth/" method="post">{% csrf_token %}
     
-     <br><input type="submit" value="Acessar" class="btn btn-primary">
-  </form></center>
-
+    <center>Usuário: <input type="text" name="username" value="" id="username"></center><br>
+     <center>&nbsp;&nbsp;Senha: <input type="password" name="password" value="" id="password"></center><br>
+    
+     <center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Acessar" class="btn btn-primary"></center>
+  </form>
+ </div></center>
+ 
 {% endblock %}

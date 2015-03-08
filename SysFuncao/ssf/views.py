@@ -1,4 +1,5 @@
 # Create your views here.
+from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib import auth
@@ -26,7 +27,8 @@ def auth_view(request):
         auth.login(request, user)
         return HttpResponseRedirect('/accounts/loggedin')
     else:
-        return HttpResponseRedirect('/')
+        sms = 1
+        return render_to_response('login.html', {'sms': sms}, context_instance=RequestContext(request))
     
 def loggedin(request):
     return render_to_response('loggedin.html', {'full_name': request.user.username})
