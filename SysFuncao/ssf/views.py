@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
-from django.contrib.formtools.tests.forms import TestForm
+from ssf.forms import TestForm
 from django.template import RequestContext
 
 from bootstrap_toolkit.widgets import BootstrapUneditableInput
