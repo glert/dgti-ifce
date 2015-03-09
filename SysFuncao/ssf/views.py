@@ -46,7 +46,7 @@ def loggedin(request):
     return render_to_response('loggedin.html', {'full_name': request.user.username})
 
 
-def form(request):
+def addrequisitos(request):
     layout = request.GET.get('layout')
     if not layout:
         layout = 'vertical'
@@ -56,7 +56,7 @@ def form(request):
     else:
         form = TestForm()
     form.fields['title'].widget = BootstrapUneditableInput()
-    return render_to_response('form.html', RequestContext(request, {
+    return render_to_response('addrequisitos.html', RequestContext(request, {
         'form': form,
         'layout': layout,
     }))
