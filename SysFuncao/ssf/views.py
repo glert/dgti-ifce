@@ -1,17 +1,15 @@
 # -*- coding:utf-8 -*-
-from django.template import RequestContext
 from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
+from django.contrib.formtools.tests.forms import TestForm
+from django.template import RequestContext
 
-from django.contrib import messages
-from django.forms.formsets import formset_factory
-from django.template.context import RequestContext
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from ssf.forms import *
 from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 class LoginView(TemplateView):
@@ -40,11 +38,14 @@ class LoginView(TemplateView):
             
           
         
-
+class LogadoView(TemplateView):
+    template_name = "loggedin.html"
     
-def loggedin(request):
-    return render_to_response('loggedin.html', {'full_name': request.user.username})
-
+    @method_decorator(login_required)
+    def get(self, request):
+        return TemplateView.get(self, request, {'full_name': request.user.username})
+    
+    
 
 def form(request):
     layout = request.GET.get('layout')
