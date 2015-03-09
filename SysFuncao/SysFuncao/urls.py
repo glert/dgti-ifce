@@ -22,9 +22,10 @@ urlpatterns = patterns('',
     url(r'^$', 'ssf.views.login'),
     url(r'^accounts/auth/$', 'ssf.views.auth_view'),
     url(r'^accounts/loggedin/$', 'ssf.views.loggedin'),
-    #url(r'^accounts/logout/$', 'ssf.views.logout'),
- 
     url(r'^$', 'ssf.views.logout'),
+    url(r'^accounts/addrequisitos/$', 'ssf.views.addrequisitos'),
+   
+    
     # acao do botao sair
       
     
