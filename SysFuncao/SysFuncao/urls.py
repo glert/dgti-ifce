@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     url(r'^accounts/loggedin/$', 'ssf.views.loggedin'),
     #url(r'^accounts/logout/$', 'ssf.views.logout'),
  
-    url(r'^form$', 'ssf.views.form'),
+    url(r'^$', 'ssf.views.logout'),
     # acao do botao sair
       
     

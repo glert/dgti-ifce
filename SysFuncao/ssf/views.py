@@ -10,7 +10,7 @@ from django.forms.formsets import formset_factory
 from django.template.context import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from ssf.forms import *
-from bootstrap_toolkit.widgets import BootstrapUneditableInput
+#from bootstrap_toolkit.widgets import BootstrapUneditableInput
 
 def login(request):
     c = {}
@@ -33,6 +33,9 @@ def auth_view(request):
 def loggedin(request):
     return render_to_response('loggedin.html', {'full_name': request.user.username})
 
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect('/')
 
 def form(request):
     layout = request.GET.get('layout')
