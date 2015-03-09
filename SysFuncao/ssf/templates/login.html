@@ -4,13 +4,13 @@
 
 {% block content %}
 
-{% if errors %}
+{% if error %}
 
 <script>
-{% for error in errors  %}
+
 window.onload = function() {
-	alert("{{erro}}");
-{% endfor %}
+	alert("{{error}}");
+
 }
 
 </script>
