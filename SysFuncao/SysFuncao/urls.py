@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin 
 from django.views.generic import TemplateView
-
+from ssf.views import LoginView
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     
-    url(r'^$', 'ssf.views.login'),
+    url(r'^$', LoginView.as_view()),
     url(r'^accounts/auth/$', 'ssf.views.auth_view'),
     url(r'^accounts/loggedin/$', 'ssf.views.loggedin'),
     #url(r'^accounts/logout/$', 'ssf.views.logout'),

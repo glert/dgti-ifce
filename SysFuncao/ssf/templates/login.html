@@ -4,12 +4,15 @@
 
 {% block content %}
 
-{% if sms %}
+{% if errors %}
 
 <script>
+{% for error in errors  %}
 window.onload = function() {
-	alert("Usuário ou Senha Inválida");
+	alert("{{erro}}");
+{% endfor %}
 }
+
 </script>
 
 {% endif %}
@@ -18,7 +21,7 @@ window.onload = function() {
  
   <center><h3>Sistema de Requisição de Funções</h3></center>
 
-  <form class="form-horizontal" action="/accounts/auth/" method="post">{% csrf_token %}
+  <form class="form-horizontal" action="/" method="post">{% csrf_token %}
     
     <center>Usuário: <input type="text" name="username" value="" id="username"></center><br>
      <center>&nbsp;&nbsp;Senha: <input type="password" name="password" value="" id="password"></center><br>

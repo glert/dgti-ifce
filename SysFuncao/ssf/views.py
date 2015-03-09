@@ -1,6 +1,6 @@
-# Create your views here.
+# -*- coding:utf-8 -*-
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
@@ -11,24 +11,36 @@ from django.template.context import RequestContext
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from ssf.forms import *
 from bootstrap_toolkit.widgets import BootstrapUneditableInput
-
-def login(request):
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('login.html', c)
+from django.views.generic import TemplateView
 
 
-def auth_view(request):
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
-    user = auth.authenticate(username=username, password=password)
-    
-    if user is not None:
-        auth.login(request, user)
-        return HttpResponseRedirect('/accounts/loggedin')
-    else:
-        sms = 1
-        return render_to_response('login.html', {'sms': sms}, context_instance=RequestContext(request))
+class LoginView(TemplateView):
+    template_name = "login.html"
+    error = ""
+    def get(self, request, ):
+        deslogar = request.GET.get('logout',None)
+        if deslogar is not None:        
+            auth.logout(request)
+        return render(request, self.template_name, csrf(request))
+    def post(self, request):
+        form = request.POST
+        username = form['username']
+        password = form['password']
+        user = auth.authenticate(username=username, password=password)  
+        if user is not None:            
+            if user.is_active:
+                auth.login(request, user)
+                return HttpResponseRedirect('/accounts/loggedin')
+            else:
+                self.error = "Seu acesso ao sistema foi bloqueado, consulte o administrador"
+                return render(request, self.template_name, {'error':self.error})
+        else:
+            self.error = "Nome de usuário e/ou senha incorretos"
+            return render(request, self.template_name,{'error':self.error})
+            
+          
+        
+
     
 def loggedin(request):
     return render_to_response('loggedin.html', {'full_name': request.user.username})
