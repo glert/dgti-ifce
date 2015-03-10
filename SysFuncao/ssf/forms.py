@@ -1,6 +1,21 @@
 from django import forms
 from django.contrib.auth.models import User
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
+from ssf.models import Nomes
+from requisitador.models import * 
+from django.forms.widgets import Select
+
+
+
+class NomesForm(forms.ModelForm):
+    class Meta:
+        model = des2
+        #CHOICES = Sistema.objects.all()
+
+        #model = Sistema
+        #fields = ('nome',)
+
+        
 
 class TestForm(forms.Form):
     date = forms.DateField(

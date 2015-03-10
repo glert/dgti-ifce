@@ -1,6 +1,13 @@
 #-*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
+from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
+
+class des2(models.Model):
+    descricao = models.TextField()
+    
+    def __unicode__(self):
+        return self.descricao
  
 class Sistema(models.Model):
     nome = models.CharField(max_length=128, unique=True)

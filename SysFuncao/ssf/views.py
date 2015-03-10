@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
-from ssf.forms import TestForm
+from ssf.forms import *
 from django.template import RequestContext
 
 from bootstrap_toolkit.widgets import BootstrapUneditableInput
@@ -52,11 +52,10 @@ def addrequisitos(request):
     if not layout:
         layout = 'vertical'
     if request.method == 'POST':
-        form = TestForm(request.POST)
+        form = NomesForm(request.POST)
         form.is_valid()
     else:
-        form = TestForm()
-    form.fields['title'].widget = BootstrapUneditableInput()
+        form = NomesForm()
     return render_to_response('addrequisitos.html', RequestContext(request, {
         'form': form,
         'layout': layout,
