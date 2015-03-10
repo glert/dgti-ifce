@@ -47,7 +47,7 @@ class LogadoView(TemplateView):
         return TemplateView.get(self, request, {'full_name': request.user.username})
     
     
-
+@login_required
 def addrequisitos(request):
     layout = request.GET.get('layout')
     if not layout:

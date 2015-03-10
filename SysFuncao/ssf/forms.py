@@ -1,5 +1,6 @@
+# -*- coding:utf-8 -*-
 from django import forms
-from django.contrib.auth.models import User
+
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
 from ssf.models import Requisicao
 
@@ -83,7 +84,8 @@ class TestForm(forms.Form):
         raise forms.ValidationError("This error was added to show the non field errors styling.")
         return cleaned_data
 
-class NovaRequisicaoForm(forms.ModelForm):
-    
+class NovaRequisicaoForm(forms.ModelForm):    
     class Meta():
         model = Requisicao
+    status_tipo  = Requisicao.getStatusNovo()
+    

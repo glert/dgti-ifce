@@ -11,20 +11,30 @@ class Sistema(models.Model):
  
 
 class Requisicao(models.Model):  
-    STATUSES_TYPE = (
+    
+    _STATUSES_TYPE = (
         (u'novo', u'Novo'),
-        (u'análise de viabilidade', u'Análise de viabilidade'),
-        (u'viável', u'Viável'),
-        (u'em implementação', u'Em implementação'),
+        (u'analise de viabilidade', u'Análise de viabilidade'),
+        (u'viavel', u'Viável'),
+        (u'em implementacao', u'Em implementação'),
         (u'rejeitado', u'Rejeitado'),
         (u'finalizado e operacional', u'Finalizado e operacional'),
     )    
     sistema = models.ForeignKey(Sistema)    
-    status_tipo = models.CharField(max_length=15, choices=STATUSES_TYPE, verbose_name='Status')
+    status_tipo = models.CharField(max_length=15, choices=_STATUSES_TYPE, verbose_name='Status')
     criador = models.ForeignKey(User, related_name='criador', null=False, blank=False)
     
     
     interessados = models.ManyToManyField(User, related_name='interessados')
+    
+    @staticmethod
+    def getStatusNovo():
+        for optgroup_key, optgroup_value in Requisicao._STATUSES_TYPE:
+            if('novo' ==  optgroup_key):
+                return optgroup_value 
+                #return self._STATUSES_TYPE[0][0]
+    
+        
     def __unicode__(self):
         return "(%s) %s por %s" % (self.pk, Sistema.objects.get(pk=self.sistema), User.objects.get(pk =self.criador))
 
