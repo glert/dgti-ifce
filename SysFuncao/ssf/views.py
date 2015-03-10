@@ -10,7 +10,7 @@ from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from ssf.forms import NovaRequisicaoForm
+from ssf.forms import *
 
 
 class LoginView(TemplateView):
@@ -47,6 +47,20 @@ class LogadoView(TemplateView):
         return TemplateView.get(self, request, {'full_name': request.user.username})
     
     
+class NovaRequisicaoView(TemplateView):
+    template_name = "addrequisitos.html"
+    
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        kwargs.append('form', NovaRequisicaoForm())
+        return TemplateView.get(self, request, *args, **kwargs)
+    
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        form = NovaRequisicaoForm(request.POST)
+        print form
+            
+
 @login_required
 def addrequisitos(request):
     layout = request.GET.get('layout')
@@ -54,7 +68,11 @@ def addrequisitos(request):
         layout = 'vertical'
     if request.method == 'POST':
         form = NovaRequisicaoForm(request.POST)
-        form.is_valid()
+         
+        if form.is_valid():
+            
+            return HttpResponseRedirect('/accounts/loggedin')
+            
     else:
         form = NovaRequisicaoForm()
 #    form.fields['title'].widget = BootstrapUneditableInput()

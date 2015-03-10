@@ -8,8 +8,15 @@ class Sistema(models.Model):
     Responsavel = User
     def __unicode__(self):
         return self.nome
- 
-
+    
+class Requisitacao2(models.Model):
+    sistema = models.ForeignKey(Sistema)
+    descricao = models.TextField()   
+    responsavel = models.TextField()
+    
+    def __unicode__(self):
+        return self.descricao, self.sistema
+    
 class Requisicao(models.Model):  
     
     _STATUSES_TYPE = (
@@ -21,7 +28,7 @@ class Requisicao(models.Model):
         (u'finalizado e operacional', u'Finalizado e operacional'),
     )    
     sistema = models.ForeignKey(Sistema)    
-    status_tipo = models.CharField(max_length=15, choices=_STATUSES_TYPE, verbose_name='Status')
+    status_tipo = models.CharField(max_length=64, choices=_STATUSES_TYPE, verbose_name='Status')
     criador = models.ForeignKey(User, related_name='criador', null=False, blank=False)
     
     
