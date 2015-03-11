@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin 
 from django.views.generic import TemplateView
-from ssf.views import LoginView, LogadoView, NovaRequisicaoView
+from ssf.views import LoginView, LogadoView
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
@@ -23,7 +23,8 @@ urlpatterns = patterns('',
     #url(r'^accounts/auth/$', 'ssf.views.auth_view'),
     url(r'^accounts/loggedin/$', LogadoView.as_view()),
     #url(r'^accounts/logout/$', 'ssf.views.logout'),
-    url(r'^accounts/addrequisitos/$', NovaRequisicaoView.as_view()),
+    #url(r'^accounts/addrequisitos/$', NovaRequisicaoView.as_view()),
+    url(r'^accounts/addrequisitos/$', 'ssf.views.addrequisitos'),
     #url(r'^form$', 'ssf.views.form'),
     # acao do botao sair
       
