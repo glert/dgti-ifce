@@ -29,9 +29,7 @@ class Requisicao(models.Model):
     )    
     sistema = models.ForeignKey(Sistema)    
     status_tipo = models.CharField(max_length=64, choices=_STATUSES_TYPE, verbose_name='Status')
-    criador = models.ForeignKey(User, related_name='criador', null=False, blank=False)
-    
-    
+    criador = models.ForeignKey(User, related_name='criador', null=False, blank=False)  
     interessados = models.ManyToManyField(User, related_name='interessados')
     
     @staticmethod
@@ -42,8 +40,8 @@ class Requisicao(models.Model):
                 #return self._STATUSES_TYPE[0][0]
     
         
-    def __unicode__(self):
-        return "(%s) %s por %s" % (self.pk, self.sistema, self.criador)
+    def __unicode__(self): 
+        return u'%s %s %s' % (self.pk, self.sistema, self.criador)
 
 class Mensagem(models.Model):
     dataHora = models.DateTimeField()
