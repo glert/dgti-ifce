@@ -2,7 +2,7 @@
 from django import forms
 
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
-from ssf.models import Requisitacao2, Requisicao
+from ssf.models import Requisitacao2
 
 class TestForm(forms.Form):
     date = forms.DateField(
@@ -95,7 +95,7 @@ class NovaRequisicaoForm(forms.ModelForm):
         ),
     )
     class Meta():
-        model = Requisicao
-        exclude = ['status_tipo','criador']
+        model = Requisitacao2
+        #exclude = ['status_tipo','criador']
 
     

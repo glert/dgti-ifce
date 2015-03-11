@@ -10,48 +10,48 @@ class Sistema(models.Model):
         return self.nome
     
 class Requisitacao2(models.Model):
-    sistema = models.ForeignKey(Sistema)
+ 
     descricao = models.TextField()   
-    responsavel = models.TextField()
-    
-    def __unicode__(self):
-        return self.descricao, self.sistema
-    
-class Requisicao(models.Model):  
-    
-    _STATUSES_TYPE = (
-        (u'novo', u'Novo'),
-        (u'analise de viabilidade', u'Análise de viabilidade'),
-        (u'viavel', u'Viável'),
-        (u'em implementacao', u'Em implementação'),
-        (u'rejeitado', u'Rejeitado'),
-        (u'finalizado e operacional', u'Finalizado e operacional'),
-    )    
-    sistema = models.ForeignKey(Sistema)    
-    status_tipo = models.CharField(max_length=64, choices=_STATUSES_TYPE, verbose_name='Status')
     criador = models.ForeignKey(User, related_name='criador', null=False, blank=False)  
-    interessados = models.ManyToManyField(User, related_name='interessados')
     
-    @staticmethod
-    def getStatusNovo():
-        for optgroup_key, optgroup_value in Requisicao._STATUSES_TYPE:
-            if('novo' ==  optgroup_key):
-                return optgroup_value 
-                #return self._STATUSES_TYPE[0][0]
-    
-        
-    def __unicode__(self): 
-        return u'%s %s %s' % (self.pk, self.sistema, self.criador)
-
-class Mensagem(models.Model):
-    dataHora = models.DateTimeField()
-    conteudo = models.TextField();
-    usuario = models.ForeignKey(User)    
-    requisicao_associada = models.ForeignKey(Requisicao)
     def __unicode__(self):
-        result = str(self.conteudo)
-        if result.len() >= 20:
-            result = '%s...' % result[:18]            
-        return result 
+        return self.descricao
+    
+# class Requisicao(models.Model):  
+#     
+#     _STATUSES_TYPE = (
+#         (u'novo', u'Novo'),
+#         (u'analise de viabilidade', u'Análise de viabilidade'),
+#         (u'viavel', u'Viável'),
+#         (u'em implementacao', u'Em implementação'),
+#         (u'rejeitado', u'Rejeitado'),
+#         (u'finalizado e operacional', u'Finalizado e operacional'),
+#     )    
+#     sistema = models.ForeignKey(Sistema)    
+#     status_tipo = models.CharField(max_length=64, choices=_STATUSES_TYPE, verbose_name='Status')
+#     criador = models.ForeignKey(User, related_name='criador', null=False, blank=False)  
+#     interessados = models.ManyToManyField(User, related_name='interessados')
+#     
+#     @staticmethod
+#     def getStatusNovo():
+#         for optgroup_key, optgroup_value in Requisicao._STATUSES_TYPE:
+#             if('novo' ==  optgroup_key):
+#                 return optgroup_value 
+#                 #return self._STATUSES_TYPE[0][0]
+#     
+#         
+#     def __unicode__(self): 
+#         return u'%s %s %s' % (self.pk, self.sistema, self.criador)
+
+# class Mensagem(models.Model):
+#     dataHora = models.DateTimeField()
+#     conteudo = models.TextField();
+#     usuario = models.ForeignKey(User)    
+#     requisicao_associada = models.ForeignKey(Requisicao)
+#     def __unicode__(self):
+#         result = str(self.conteudo)
+#         if result.len() >= 20:
+#             result = '%s...' % result[:18]            
+#         return result 
           
     
