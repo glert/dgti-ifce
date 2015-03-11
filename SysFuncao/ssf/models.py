@@ -43,7 +43,7 @@ class Requisicao(models.Model):
     
         
     def __unicode__(self):
-        return "(%s) %s por %s" % (self.pk, Sistema.objects.get(pk=self.sistema), User.objects.get(pk =self.criador))
+        return "(%s) %s por %s" % (self.pk, self.sistema, self.criador)
 
 class Mensagem(models.Model):
     dataHora = models.DateTimeField()
