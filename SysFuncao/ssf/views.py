@@ -14,7 +14,7 @@ from ssf.forms import *
 
 
 class LoginView(TemplateView):
-    template_name = "login.html"
+    template_name = "login.djhtml"
     error = ""
     def get(self, request, ):
         deslogar = request.GET.get('logout',None)
@@ -40,7 +40,7 @@ class LoginView(TemplateView):
           
         
 class LogadoView(TemplateView):
-    template_name = "loggedin.html"
+    template_name = "loggedin.djhtml"
     
     @method_decorator(login_required)
     def get(self, request):
@@ -48,17 +48,21 @@ class LogadoView(TemplateView):
     
     
 class NovaRequisicaoView(TemplateView):
-    template_name = "addrequisitos.html"
+    template_name = "addrequisitos.djhtml"
     
     @method_decorator(login_required)
-    def get(self, request, *args, **kwargs):
-        kwargs.append('form', NovaRequisicaoForm())
-        return TemplateView.get(self, request, *args, **kwargs)
+    def get(self, request):
+        layout  = request.GET.get('layout', None)
+        if layout == None:
+            layout = 'vertical'
+                   
+        return TemplateView.get(self, request, {'form': NovaRequisicaoForm, 'layout': layout})
     
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
-        form = NovaRequisicaoForm(request.POST)
-        print form
+        formul = NovaRequisicaoForm(request.POST)
+        print formul
+        return TemplateView.get(self, request, {'form': formul, 'layout': 'vertical'})
             
 
 @login_required
@@ -70,13 +74,13 @@ def addrequisitos(request):
         form = NovaRequisicaoForm(request.POST)
          
         if form.is_valid():
-            
+            #tem que introduzir algo na persistência
             return HttpResponseRedirect('/accounts/loggedin')
             
     else:
         form = NovaRequisicaoForm()
 #    form.fields['title'].widget = BootstrapUneditableInput()
-    return render_to_response('addrequisitos.html', RequestContext(request, {
+    return render_to_response('addrequisitos.djhtml', RequestContext(request, {
         'form': form,
         'layout': layout,
     }))
