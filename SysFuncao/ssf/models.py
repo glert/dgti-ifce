@@ -53,5 +53,5 @@ class Requisicao(models.Model):
 #         if result.len() >= 20:
 #             result = '%s...' % result[:18]            
 #         return result 
-          
-    
+
+        

@@ -95,5 +95,9 @@ def addrequisitos(request):
 
 def consultarrequisicao(request):
     #s = "a"
-    s = Requisicao.objects.all()
+    #s = Requisicao.objects.filter(id='')
+    #s = Requisicao.objects.get(id=1, sistema=1)
+    s2 = Requisicao.objects.all()
+    s = s2.id
+    
     return render_to_response('consultarrequisicao.djhtml', {'s':s})

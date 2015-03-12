@@ -8,22 +8,21 @@
 
 {% block content %}
 
-{{ s }}
-
     <h1>Acompanhamento da Requisição</h1>
     
-    
-
+<br><br>
 <div class="row">
-        <div class="span4">
+    {% for s in s %}
+    <div class="span4">
             <h2>{{ s }}</h2>
 
             <p>Django is the excellent Python web framework that makes a programmer's life less repetitive.</p>
 
             <p><a class="btn" href="http://www.djangoproject.com">View details &raquo;</a></p>
-        </div>       
-    </div>
-
-    <p>A big thanks to all the people that worked on Django and Bootstrap.</p>
-
+        </div>
+             
+    {% endfor %}
+    
+</div>
+    
 {% endblock %}
