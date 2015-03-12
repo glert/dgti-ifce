@@ -107,6 +107,7 @@ def consultarrequisicao(request):
     #s = Requisicao.objects.filter(id=1)
 #     nomeSistemas = Requisicao.objects.values_list('criador', flat=True)[0:]
     requisicoes = Requisicao.objects.filter(criador=request.user)
+    
 
     
     return render_to_response('consultaReq.djhtml', {'requisicoes':requisicoes})

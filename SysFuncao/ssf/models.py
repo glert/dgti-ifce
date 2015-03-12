@@ -36,9 +36,9 @@ class Requisicao(models.Model):
         return u'%s %s %s' % (self.pk, self.sistema, self.criador)
 
 class Mensagem(models.Model):
-    dataHora = models.DateTimeField()
-    conteudo = models.TextField();
-    usuario = models.ForeignKey(User)    
+    dataHora = models.DateTimeField(null=False, blank=False)
+    conteudo = models.TextField(null=False, blank=False);
+    usuario = models.ForeignKey(User, null=False, blank=False)    
     requisicao_associada = models.ForeignKey(Requisicao)
     def __unicode__(self):
         result = str(self.conteudo)
