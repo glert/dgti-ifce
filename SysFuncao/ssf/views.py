@@ -62,7 +62,11 @@ class NovaRequisicaoView(TemplateView):
     @method_decorator(login_required)
     def post(self, request):
         formul = NovaRequisicaoForm(request.POST)
-        print formul
+        if formul.is_valid():
+            print formul.cleaned_data
+        else:
+            print formul.errors
+            
         #return TemplateView.get(self, request, {'form': formul, 'layout': 'vertical'})
         return render(request, self.template_name, {'form': NovaRequisicaoForm(), 'layout': 'vertical'})    
 

@@ -92,10 +92,11 @@ class NovaRequisicaoForm(forms.Form):
     interessados = forms.ModelMultipleChoiceField(queryset=User.objects.all())  
     
     menssagem = forms.CharField(
-        max_length=100,
+        max_length=1024,
         widget=forms.Textarea(
             attrs={
                 'placeholder': 'escreva sua messagem',
+                'maxlength':"1024",
             }
         ),
     )
