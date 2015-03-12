@@ -9,14 +9,6 @@ class Sistema(models.Model):
     def __unicode__(self):
         return self.nome
     
-class Requisitacao2(models.Model):
-    sistema = models.ForeignKey(Sistema)
-    descricao = models.TextField()   
-    responsavel = models.TextField()
-    
-    def __unicode__(self):
-        return self.descricao, self.sistema
-    
 class Requisicao(models.Model):  
     
     _STATUSES_TYPE = (

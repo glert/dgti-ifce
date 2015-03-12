@@ -91,7 +91,7 @@ class NovaRequisicaoForm(forms.Form):
     sistema = forms.ModelChoiceField(queryset=Sistema.objects.all())
     interessados = forms.ModelMultipleChoiceField(queryset=User.objects.all())  
     
-    menssagem = forms.CharField(
+    mensagem = forms.CharField(
         max_length=1024,
         widget=forms.Textarea(
             attrs={
@@ -100,10 +100,3 @@ class NovaRequisicaoForm(forms.Form):
             }
         ),
     )
-    
-        
-#     class Meta():
-#         model = Requisicao
-#         exclude = ['status_tipo','criador']
-
-    

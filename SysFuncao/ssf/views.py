@@ -11,6 +11,8 @@ from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from ssf.forms import *
+from datetime import datetime
+from ssf.models import Requisicao, Mensagem
 
 
 class LoginView(TemplateView):
@@ -55,19 +57,40 @@ class NovaRequisicaoView(TemplateView):
         layout  = request.GET.get('layout', None)
         if layout == None:
             layout = 'vertical'
-                   
-        #return TemplateView.get(self, request, {'form': NovaRequisicaoForm(), 'layout': layout})
+       
         return render(request, self.template_name, {'form': NovaRequisicaoForm(), 'layout': layout})
     
     @method_decorator(login_required)
     def post(self, request):
         formul = NovaRequisicaoForm(request.POST)
         if formul.is_valid():
-            print formul.cleaned_data
+            nomeSistema = formul.cleaned_data['sistema']
+            interessados = formul.cleaned_data['interessados']
+            msg_form = formul.cleaned_data['mensagem']
+            criador = request.getUser()
+                   
+            interessadosObjs = []
+            for nome_u in interessados:
+                interessadosObjs.append(User.objects.get_by_natural_key(nome_u))            
+            
+            
+            novaReq = Requisicao()
+            novaReq.criador = criador
+            novaReq.status_tipo = Requisicao.getStatusNovo()
+            novaReq.sistema = Sistema.objects.get(nome=nomeSistema)
+            novaReq.interessados = interessadosObjs
+                
+            novaReq.save()
+            msgInicial = Mensagem()
+            msgInicial.requisicao_associada = novaReq
+            msgInicial.conteudo = msg_form
+            msgInicial.dataHora = datetime.now()
+            
+            msgInicial.save()
+              
         else:
             print formul.errors
             
-        #return TemplateView.get(self, request, {'form': formul, 'layout': 'vertical'})
         return render(request, self.template_name, {'form': NovaRequisicaoForm(), 'layout': 'vertical'})    
 
 @login_required
