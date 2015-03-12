@@ -67,25 +67,29 @@ class NovaRequisicaoView(TemplateView):
             nomeSistema = formul.cleaned_data['sistema']
             interessados = formul.cleaned_data['interessados']
             msg_form = formul.cleaned_data['mensagem']
-            criador = request.getUser()
-                   
-            interessadosObjs = []
-            for nome_u in interessados:
-                interessadosObjs.append(User.objects.get_by_natural_key(nome_u))            
+            criador = request.user
+#                    
+#             interessadosObjs = []
+#             for nome_u in interessados:
+#                 interessadosObjs.append(User.objects.get_by_natural_key(nome_u))            
             
             
             novaReq = Requisicao()
             novaReq.criador = criador
             novaReq.status_tipo = Requisicao.getStatusNovo()
             novaReq.sistema = Sistema.objects.get(nome=nomeSistema)
-            novaReq.interessados = interessadosObjs
-                
+            
+            novaReq.save()           
+            novaReq.interessados = interessados
             novaReq.save()
+            
             msgInicial = Mensagem()
+            msgInicial.usuario = request.user
             msgInicial.requisicao_associada = novaReq
             msgInicial.conteudo = msg_form
             msgInicial.dataHora = datetime.now()
             
+           
             msgInicial.save()
               
         else:

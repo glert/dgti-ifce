@@ -19,7 +19,7 @@ class Requisicao(models.Model):
         (u'rejeitado', u'Rejeitado'),
         (u'finalizado e operacional', u'Finalizado e operacional'),
     )    
-    sistema = models.ForeignKey(Sistema)    
+    sistema = models.ForeignKey(Sistema, null=False, blank=False)    
     status_tipo = models.CharField(max_length=64, choices=_STATUSES_TYPE, verbose_name='Status')
     criador = models.ForeignKey(User, related_name='criador', null=False, blank=False)  
     interessados = models.ManyToManyField(User, related_name='interessados')
@@ -42,7 +42,7 @@ class Mensagem(models.Model):
     requisicao_associada = models.ForeignKey(Requisicao)
     def __unicode__(self):
         result = str(self.conteudo)
-        if result.len() >= 20:
+        if len(result) >= 20:
             result = '%s...' % result[:18]            
         return result 
           
