@@ -71,12 +71,7 @@ class NovaRequisicaoView(TemplateView):
             interessados = formul.cleaned_data['interessados']
             msg_form = formul.cleaned_data['mensagem']
             criador = request.user
-#                    
-#             interessadosObjs = []
-#             for nome_u in interessados:
-#                 interessadosObjs.append(User.objects.get_by_natural_key(nome_u))            
-            
-            
+#             
             novaReq = Requisicao()
             novaReq.criador = criador
             novaReq.status_tipo = Requisicao.getStatusNovo()
@@ -110,7 +105,8 @@ def consultarrequisicao(request):
     #s = Requisicao.objects.all()
     
     #s = Requisicao.objects.filter(id=1)
-    nomeSistemas = Requisicao.objects.values_list('criador', flat=True)[0:]
+#     nomeSistemas = Requisicao.objects.values_list('criador', flat=True)[0:]
+    requisicoes = Requisicao.objects.filter(criador=request.user)
 
     
-    return render_to_response('consultaReq.djhtml', {'s':nomeSistemas})
+    return render_to_response('consultaReq.djhtml', {'requisicoes':requisicoes})
