@@ -44,7 +44,7 @@ class LogadoView(TemplateView):
     
     @method_decorator(login_required)
     def get(self, request):
-        return TemplateView.get(self, request, {'full_name': request.user.username})
+        return render(request, self.template_name, {'full_name': request.user.username})
     
     
 class NovaRequisicaoView(TemplateView):
@@ -56,14 +56,15 @@ class NovaRequisicaoView(TemplateView):
         if layout == None:
             layout = 'vertical'
                    
-        return TemplateView.get(self, request, {'form': NovaRequisicaoForm, 'layout': layout})
+        #return TemplateView.get(self, request, {'form': NovaRequisicaoForm(), 'layout': layout})
+        return render(request, self.template_name, {'form': NovaRequisicaoForm(), 'layout': layout})
     
     @method_decorator(login_required)
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         formul = NovaRequisicaoForm(request.POST)
         print formul
-        return TemplateView.get(self, request, {'form': formul, 'layout': 'vertical'})
-            
+        #return TemplateView.get(self, request, {'form': formul, 'layout': 'vertical'})
+        return render(request, self.template_name, {'form': NovaRequisicaoForm(), 'layout': 'vertical'})    
 
 @login_required
 def addrequisitos(request):

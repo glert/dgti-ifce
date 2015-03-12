@@ -2,7 +2,9 @@
 from django import forms
 
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
-from ssf.models import Requisitacao2, Requisicao
+from ssf.models import Sistema
+from django.contrib.auth.models import User
+
 
 class TestForm(forms.Form):
     date = forms.DateField(
@@ -84,9 +86,12 @@ class TestForm(forms.Form):
         raise forms.ValidationError("This error was added to show the non field errors styling.")
         return cleaned_data
 
-class NovaRequisicaoForm(forms.ModelForm):  
+class NovaRequisicaoForm(forms.Form):  
     
-    messagem = forms.CharField(
+    sistema = forms.ModelChoiceField(queryset=Sistema.objects.all())
+    interessados = forms.ModelMultipleChoiceField(queryset=User.objects.all())  
+    
+    menssagem = forms.CharField(
         max_length=100,
         widget=forms.Textarea(
             attrs={
@@ -94,8 +99,10 @@ class NovaRequisicaoForm(forms.ModelForm):
             }
         ),
     )
-    class Meta():
-        model = Requisicao
-        exclude = ['status_tipo','criador']
+    
+        
+#     class Meta():
+#         model = Requisicao
+#         exclude = ['status_tipo','criador']
 
     

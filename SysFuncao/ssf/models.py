@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
  
 class Sistema(models.Model):
-    nome = models.CharField(max_length=128, unique=True)
+    nome = models.CharField(max_length=64, unique=True)
     finalidade = models.TextField()
     Responsavel = User
     def __unicode__(self):
