@@ -9,6 +9,12 @@
         <p>Nesta rotina é possível cadastrar as especificações de requisitos de software.</p>
         <p><a class="btn btn-primary" href="/accounts/addrequisitos/">Adicionar Requisito &raquo;</a></p>
     </div>
+    
+    <div class="well">
+        <h1>Acompanhamento das Requisições</h1>
+        <p>Nesta rotina é possível Consultar as Reposta dos Novos Requisitos Solicitados.</p>
+        <p><a class="btn btn-primary" href="/accounts/consultarrequisicao/">Consultar Requisições &raquo;</a></p>
+    </div>
 
 
 {% endblock %}

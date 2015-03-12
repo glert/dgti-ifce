@@ -93,4 +93,7 @@ def addrequisitos(request):
         'layout': layout,
     }))
 
-
+def consultarrequisicao(request):
+    #s = "a"
+    s = Requisicao.objects.all()
+    return render_to_response('consultarrequisicao.djhtml', {'s':s})

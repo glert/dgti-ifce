@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     #url(r'^accounts/logout/$', 'ssf.views.logout'),
     #url(r'^accounts/addrequisitos/$', NovaRequisicaoView.as_view()),
     url(r'^accounts/addrequisitos/$', 'ssf.views.addrequisitos'),
+    url(r'^accounts/consultarrequisicao/$', 'ssf.views.consultarrequisicao'),
     #url(r'^form$', 'ssf.views.form'),
     # acao do botao sair
       
