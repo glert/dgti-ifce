@@ -62,6 +62,9 @@ class NovaRequisicaoView(TemplateView):
     
     @method_decorator(login_required)
     def post(self, request):
+        layout = request.GET.get('layout')
+        if not layout:
+            layout = 'vertical'
         formul = NovaRequisicaoForm(request.POST)
         if formul.is_valid():
             nomeSistema = formul.cleaned_data['sistema']
@@ -91,30 +94,23 @@ class NovaRequisicaoView(TemplateView):
             
            
             msgInicial.save()
+            return HttpResponseRedirect('/accounts/loggedin')
               
         else:
-            print formul.errors
-            
-        return render(request, self.template_name, {'form': NovaRequisicaoForm(), 'layout': 'vertical'})    
+            return render_to_response('addrequisitos.djhtml', RequestContext(request, {
+                'form': formul,
+                'layout': layout,
+                }))
 
-@login_required
-def addrequisitos(request):
-    layout = request.GET.get('layout')
-    if not layout:
-        layout = 'vertical'
-    if request.method == 'POST':
-        form = NovaRequisicaoForm(request.POST)
-         
-        if form.is_valid():
-            #tem que introduzir algo na persistência
-            return HttpResponseRedirect('/accounts/loggedin')
-            
-    else:
-        form = NovaRequisicaoForm()
-#    form.fields['title'].widget = BootstrapUneditableInput()
-    return render_to_response('addrequisitos.djhtml', RequestContext(request, {
-        'form': form,
-        'layout': layout,
-    }))
+def consultarrequisicao(request):
+    #s = "a"
+    #s = Requisicao.objects.filter(id='')
+    #s = Requisicao.objects.get(id=1, sistema=1)
+    
+    #s = Requisicao.objects.all()
+    
+    #s = Requisicao.objects.filter(id=1)
+    nomeSistemas = Requisicao.objects.values_list('criador', flat=True)[0:]
 
-
+    
+    return render_to_response('consultaReq.djhtml', {'s':nomeSistemas})
