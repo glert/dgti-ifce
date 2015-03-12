@@ -2,7 +2,7 @@
 from django import forms
 
 from bootstrap_toolkit.widgets import BootstrapDateInput, BootstrapTextInput, BootstrapUneditableInput
-from ssf.models import Requisitacao2
+from ssf.models import Requisicao
 
 class TestForm(forms.Form):
     date = forms.DateField(
@@ -86,16 +86,16 @@ class TestForm(forms.Form):
 
 class NovaRequisicaoForm(forms.ModelForm):  
     
-    messagem = forms.CharField(
-        max_length=100,
-        widget=forms.Textarea(
-            attrs={
-                'placeholder': 'escreva sua messagem',
-            }
-        ),
-    )
+#     messagem = forms.CharField(
+#         max_length=100,
+#         widget=forms.Textarea(
+#             attrs={
+#                 'placeholder': 'escreva sua messagem',
+#             }
+#         ),
+#     )
     class Meta():
-        model = Requisitacao2
-        #exclude = ['status_tipo','criador']
+        model = Requisicao
+        exclude = ['status_tipo']
 
     

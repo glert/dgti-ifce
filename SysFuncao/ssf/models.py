@@ -17,21 +17,21 @@ class Requisitacao2(models.Model):
     def __unicode__(self):
         return self.descricao
     
-# class Requisicao(models.Model):  
-#     
-#     _STATUSES_TYPE = (
-#         (u'novo', u'Novo'),
-#         (u'analise de viabilidade', u'Análise de viabilidade'),
-#         (u'viavel', u'Viável'),
-#         (u'em implementacao', u'Em implementação'),
-#         (u'rejeitado', u'Rejeitado'),
-#         (u'finalizado e operacional', u'Finalizado e operacional'),
-#     )    
-#     sistema = models.ForeignKey(Sistema)    
-#     status_tipo = models.CharField(max_length=64, choices=_STATUSES_TYPE, verbose_name='Status')
-#     criador = models.ForeignKey(User, related_name='criador', null=False, blank=False)  
-#     interessados = models.ManyToManyField(User, related_name='interessados')
-#     
+class Requisicao(models.Model):  
+     
+    _STATUSES_TYPE = (
+        (u'novo', u'Novo'),
+        (u'analise de viabilidade', u'Análise de viabilidade'),
+        (u'viavel', u'Viável'),
+        (u'em implementacao', u'Em implementação'),
+        (u'rejeitado', u'Rejeitado'),
+        (u'finalizado e operacional', u'Finalizado e operacional'),
+    )    
+    sistema = models.ForeignKey(Sistema)    
+    status_tipo = models.CharField(max_length=64, choices=_STATUSES_TYPE, verbose_name='Status')
+    #criador = models.ForeignKey(User, related_name='criador', null=False, blank=False)  
+    #interessados = models.ManyToManyField(User, related_name='interessados')
+    mensagem = models.TextField()
 #     @staticmethod
 #     def getStatusNovo():
 #         for optgroup_key, optgroup_value in Requisicao._STATUSES_TYPE:
@@ -40,8 +40,8 @@ class Requisitacao2(models.Model):
 #                 #return self._STATUSES_TYPE[0][0]
 #     
 #         
-#     def __unicode__(self): 
-#         return u'%s %s %s' % (self.pk, self.sistema, self.criador)
+    def __unicode__(self): 
+        return u'%s %s' % (self.pk, self.sistema)
 
 # class Mensagem(models.Model):
 #     dataHora = models.DateTimeField()

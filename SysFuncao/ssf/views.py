@@ -76,11 +76,11 @@ def addrequisitos(request):
         if form.is_valid():
             #tem que introduzir algo na persistência
             
-            sistemaf = form.cleaned_data['descricao']
-            sistemaff = form.cleaned_data['criador']
+            sistemaf = form.cleaned_data['sistema']
+            sistemaff = form.cleaned_data['mensagem']
             
-            n = Requisitacao2.objects.all()
-            n = Requisitacao2(descricao=sistemaf, criador=sistemaff)
+            n = Requisicao.objects.all()
+            n = Requisicao(sistema=sistemaf, mensagem=sistemaff)
             n.save()
             
             return HttpResponseRedirect('/accounts/loggedin')
