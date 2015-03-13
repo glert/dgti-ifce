@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.contrib import admin 
+from django.contrib import admi
 from django.views.generic import TemplateView
 from ssf.views import LoginView, LogadoView
 # Uncomment the next two lines to enable the admin:
