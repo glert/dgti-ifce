@@ -26,10 +26,12 @@ class Requisicao(models.Model):
     
     @staticmethod
     def getStatusNovo():
-        for optgroup_key, optgroup_value in Requisicao._STATUSES_TYPE:
-            if('novo' ==  optgroup_key):
-                return optgroup_value 
-                #return self._STATUSES_TYPE[0][0]
+        StatusNovo = Requisicao.status_tipo = 'novo'
+        return StatusNovo    
+#         for optgroup_key, optgroup_value in Requisicao._STATUSES_TYPE:
+#             if('novo' ==  optgroup_key):
+#                 return optgroup_value 
+               
     
         
     def __unicode__(self): 
