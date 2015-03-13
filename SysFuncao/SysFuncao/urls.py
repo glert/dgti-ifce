@@ -6,7 +6,7 @@ from ssf.views import LoginView, LogadoVie
 # from django.contrib import admin
 # admin.autodiscover()
 
-admin.autodiscover() 
+admin.autodiscove() 
 
 urlpatterns = patterns('',
     # Examples:
