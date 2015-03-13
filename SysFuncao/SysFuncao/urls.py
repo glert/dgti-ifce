@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admi
 from django.views.generic import TemplateView
-from ssf.views import LoginView, LogadoView
+from ssf.views import LoginView, LogadoVie
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
