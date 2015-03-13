@@ -6,7 +6,7 @@ from ssf.models import Sistema
 from django.contrib.auth.models import User
 
 
-class TestFor(forms.Form):
+class TestForm(forms.Form)
     date = forms.DateField(
         widget=BootstrapDateInput(),
     )
