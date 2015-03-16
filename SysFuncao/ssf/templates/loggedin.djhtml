@@ -5,9 +5,12 @@
 {{ full_name }}
 
 <div class="row">
-    {% for s in requisicoes %}
+
+    {% for s in requisicoes %} 
     <div class="span4">
             <h2>{{ s }}</h2>
+
+              <p>{{ s.mensagem_set.all }}</p>
 
             <p><a class="btn" href="http://www.djangoproject.com">Ver Detalhes &raquo;</a></p>
         </div>
