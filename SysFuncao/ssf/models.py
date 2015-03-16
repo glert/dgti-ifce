@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Max
  
 class Sistema(models.Model):
     nome = models.CharField(max_length=64, unique=True)
@@ -31,7 +32,9 @@ class Requisicao(models.Model):
 #         for optgroup_key, optgroup_value in Requisicao._STATUSES_TYPE:
 #             if('novo' ==  optgroup_key):
 #                 return optgroup_value 
-               
+    def getLastMessage(self):
+        maiorData = self.mensagem_set.all().aggregate(Max('dataHora'))['dataHora__max']
+        return self.mensagem_set.get(dataHora=maiorData)
     
         
     def __unicode__(self): 
