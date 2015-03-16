@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     
     url(r'^$', LoginView.as_view()),
+    url(r'^accounts/login/$', LoginView.as_view()),
     #url(r'^accounts/auth/$', 'ssf.views.auth_view'),
     url(r'^accounts/loggedin/$', LogadoView.as_view()),
     #url(r'^accounts/logout/$', 'ssf.views.logout'),

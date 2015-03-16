@@ -50,8 +50,7 @@ class LogadoView(TemplateView):
     def get(self, request):
         requisicoes = Requisicao.objects.all()
         mensagem = Mensagem.objects.all()
-        return render_to_response('loggedin.djhtml', {'requisicoes':requisicoes, 'mensagem':mensagem})
-        return render(request, self.template_name, {'full_name': request.user.username})
+        return render(request, self.template_name, {'requisicoes':requisicoes, 'mensagem':mensagem,'full_name': request.user.username})
     
     
     
