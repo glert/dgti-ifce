@@ -8,7 +8,7 @@
 
     {% for s in requisicoes %} 
     <div class="span4">
-            <h2>{{ s }}</h2>
+            <h2>{{ s.sistema }}</h2>
 
               <p>{{ s.mensagem_set.all }}</p>
 
