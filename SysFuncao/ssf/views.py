@@ -96,16 +96,8 @@ class NovaRequisicaoView(TemplateView):
                 'form': formul,
                 'layout': layout,
                 }))
-
+@login_required
 def consultarrequisicao(request):
-    #s = "a"
-    #s = Requisicao.objects.filter(id='')
-    #s = Requisicao.objects.get(id=1, sistema=1)
-    
-    #s = Requisicao.objects.all()
-    
-    #s = Requisicao.objects.filter(id=1)
-#     nomeSistemas = Requisicao.objects.values_list('criador', flat=True)[0:]
     requisicoes = Requisicao.objects.filter(criador=request.user)
     
     
