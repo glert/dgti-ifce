@@ -31,6 +31,8 @@ class LoginView(TemplateView):
         if user is not None:            
             if user.is_active:
                 auth.login(request, user)
+                requisicoes = Requisicao.objects.all()
+                return render_to_response('loggedin.djhtml', {'requisicoes':requisicoes})
                 return HttpResponseRedirect('/accounts/loggedin')
             else:
                 self.error = "Seu acesso ao sistema foi bloqueado, consulte o administrador"
@@ -46,7 +48,10 @@ class LogadoView(TemplateView):
     
     @method_decorator(login_required)
     def get(self, request):
+        requisicoes = Requisicao.objects.all()
+        return render_to_response('loggedin.djhtml', {'requisicoes':requisicoes})
         return render(request, self.template_name, {'full_name': request.user.username})
+    
     
     
 class NovaRequisicaoView(TemplateView):
@@ -106,7 +111,7 @@ def consultarrequisicao(request):
     
     #s = Requisicao.objects.filter(id=1)
 #     nomeSistemas = Requisicao.objects.values_list('criador', flat=True)[0:]
-    requisicoes = Requisicao.objects.filter(criador=request.user)
+    requisicoes = Requisicao.objects.all()
     
     
-    return render_to_response('consultaReq.djhtml', {'requisicoes':requisicoes})
+    return render_to_response('loggedin.djhtml', {'requisicoes':requisicoes})
