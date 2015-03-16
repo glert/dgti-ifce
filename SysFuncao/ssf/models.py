@@ -32,10 +32,9 @@ class Requisicao(models.Model):
 #         for optgroup_key, optgroup_value in Requisicao._STATUSES_TYPE:
 #             if('novo' ==  optgroup_key):
 #                 return optgroup_value 
-    @staticmethod
-    def getLastMessage(requisicao):
-        maiorData = requisicao.mensagem_set.objects.all().aggregate(Max('dataHora'))['dataHora__max']
-        return requisicao.mensagem_set.get(dataHora=maiorData)
+    def getLastMessage(self):
+        maiorData = self.mensagem_set.all().aggregate(Max('dataHora'))['dataHora__max']
+        return self.mensagem_set.get(dataHora=maiorData)
     
         
     def __unicode__(self): 

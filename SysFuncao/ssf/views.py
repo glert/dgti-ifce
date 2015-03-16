@@ -6,13 +6,13 @@ from django.core.context_processors import csrf
 
 from django.template import RequestContext
 
-from bootstrap_toolkit.widgets import BootstrapUneditableInput
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from ssf.forms import *
+from django.db.models import Q
 from datetime import datetime
-from ssf.models import Requisicao, Mensagem
+from ssf.models import Requisicao, Mensagem, Sistema
+from ssf.forms import NovaRequisicaoForm
 
 
 class LoginView(TemplateView):
@@ -48,9 +48,14 @@ class LogadoView(TemplateView):
     
     @method_decorator(login_required)
     def get(self, request):
-        requisicoes = Requisicao.objects.all()
-        mensagem = Mensagem.objects.all()
-        return render(request, self.template_name, {'requisicoes':requisicoes, 'mensagem':mensagem,'full_name': request.user.username})
+        requisicoes = Requisicao.objects.filter(
+                                            Q(criador=request.user) |
+                                            Q(interessados__username=request.user)
+        ).distinct()
+        dados = {}
+        for r in requisicoes:
+            dados[r] = r.getLastMessage()
+        return render(request, self.template_name, {'requisicoes':dados, 'full_name': request.user.username})
     
     
     
@@ -111,7 +116,10 @@ def consultarrequisicao(request):
     
     #s = Requisicao.objects.filter(id=1)
 #     nomeSistemas = Requisicao.objects.values_list('criador', flat=True)[0:]
-    requisicoes = Requisicao.objects.filter(criador=request.user)
+    requisicoes = Requisicao.objects.filter(Q(criador=request.user) |
+                                            Q(interessados__in=request.user)).distinct()
+    dados = {}
+    for r in requisicoes:
+        dados[r] = r.getLastMessage()
     
-    
-    return render_to_response('loggedin.djhtml', {'requisicoes':requisicoes})
+    return render_to_response('loggedin.djhtml', {'requisicoes':dados})
