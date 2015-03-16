@@ -16,7 +16,7 @@
     <div class="span4">
             <h2>{{ s }}</h2>
 
-            <p>{{ s.mensagem_set.all }}</p>
+            <p>{{ s.getLastMessage }}</p>
 
             <p><a class="btn" href="http://www.djangoproject.com">View details &raquo;</a></p>
         </div>

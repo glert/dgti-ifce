@@ -6,11 +6,11 @@
 
 <div class="row">
 
-    {% for s in requisicoes %} 
+    {% for key, value in requisicoes.items %} 
     <div class="span4">
-            <h2>{{ s.sistema }}</h2>
+            <h2>#{{ key }}</h2>
 
-              <p>{{ s.mensagem_set.all }}</p>
+              <p>{{ value }}</p>
 
             <p><a class="btn" href="http://www.djangoproject.com">Ver Detalhes &raquo;</a></p>
         </div>
