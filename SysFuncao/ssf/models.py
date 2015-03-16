@@ -39,9 +39,10 @@ class Requisicao(models.Model):
 
 class Mensagem(models.Model):
     dataHora = models.DateTimeField(null=False, blank=False)
-    conteudo = models.TextField(null=False, blank=False);
+    conteudo = models.TextField(null=False, blank=False)
     usuario = models.ForeignKey(User, null=False, blank=False)    
     requisicao_associada = models.ForeignKey(Requisicao)
+    
     def __unicode__(self):
         result = str(self.conteudo)
         if len(result) >= 20:
