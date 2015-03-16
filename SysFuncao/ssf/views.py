@@ -31,8 +31,7 @@ class LoginView(TemplateView):
         if user is not None:            
             if user.is_active:
                 auth.login(request, user)
-                requisicoes = Requisicao.objects.all()
-                return render_to_response('loggedin.djhtml', {'requisicoes':requisicoes})
+                
                 return HttpResponseRedirect('/accounts/loggedin')
             else:
                 self.error = "Seu acesso ao sistema foi bloqueado, consulte o administrador"
