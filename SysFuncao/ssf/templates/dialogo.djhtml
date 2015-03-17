@@ -100,6 +100,7 @@ section div {
 {% block content %}
 
 {{ currentUrl }}
+{{ mensagem2 }}
 
   <section>
 
