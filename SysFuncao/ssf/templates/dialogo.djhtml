@@ -103,7 +103,27 @@ section div {
     <div class="from-me">
       <p><h5>Person name:</h5>Hey there! What's up?</p><p align="right" style="font-style: italic; font-size:11px;">Time</p>
     </div>
+  <div class="clear"></div>
+    <div class="from-me">
+      <p>Check out this bubble!</p>
+    </div>
+
+
+  <div class="clear"></div>
+    <div class="from-them">
+      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
+    </div>
     
+    <div class="clear"></div>
+    <div class="from-them">
+      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
+    </div>
+
+  <div class="clear"></div>
+    <div class="from-me">
+      <p>Check out this bubble!</p>
+    </div>
+
   <div class="clear"></div>
     <div class="from-them">
       <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
