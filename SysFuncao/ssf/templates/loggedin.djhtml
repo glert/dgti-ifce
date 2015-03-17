@@ -2,8 +2,6 @@
 
 {% block content %}
 
-Bem vindo(a) {{ full_name }}
-
 <div class="row">
 
     {% for requisicao, ultima_mensagem in requisicoes.items %} 
