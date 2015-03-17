@@ -8,7 +8,7 @@ class Sistema(models.Model):
     finalidade = models.TextField()
     Responsavel = User
     def __unicode__(self):
-        return self.nome
+        return u"%s" % self.nome
     
 class Requisicao(models.Model):  
     
@@ -47,9 +47,9 @@ class Mensagem(models.Model):
     requisicao_associada = models.ForeignKey(Requisicao)
     
     def __unicode__(self):
-        result = str(self.conteudo)
+        result = unicode(self.conteudo)
         if len(result) >= 20:
-            result = '%s...' % result[:18]            
+            result = u'%s...' % result[:18]            
         return result 
           
     

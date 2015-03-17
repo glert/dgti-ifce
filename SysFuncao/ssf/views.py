@@ -118,13 +118,11 @@ def dialogo(request):
 class RequisicaoView(TemplateView):
     template_name = 'dialogo.djhtml'
     
-    @method_decorator(login_required)
+    @method_decorator(login_required) #TODO tem que colocar uma permissão aqui de acordo com o usuário
     def get(self, request, requisicao_id):
         
-        currentUrl = request.get_full_path()
-        currentUrl = currentUrl[18:20]
-        criador = Requisicao.objects.filter(pk=currentUrl)
-        mensagem = Mensagem.objects.filter(pk=currentUrl)
-        mensagem2 = Mensagem.objects.all()
+        requisicao = Requisicao.objects.get(pk=requisicao_id)
+        mensagens = requisicao.mensagem_set.all().order_by('dataHora')
+    
         
-        return render_to_response('dialogo.djhtml', {'criador':criador, 'mensagem':mensagem, 'currentUrl':currentUrl, 'mensagem2':mensagem2})
+        return render(request, 'dialogo.djhtml', {'mensagens': mensagens,'requisicao':requisicao})

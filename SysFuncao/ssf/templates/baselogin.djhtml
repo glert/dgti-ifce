@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <title>Sistema de Requisitos de Funções</title>
     <meta name="description" content="">
-    <meta name="author" content="Dylan Verheul">
+    
     {% bootstrap_stylesheet_tag %}
     {% bootstrap_stylesheet_tag "responsive" %}
     <style type="text/css">
