@@ -125,5 +125,6 @@ class RequisicaoView(TemplateView):
         currentUrl = currentUrl[18:20]
         criador = Requisicao.objects.filter(pk=currentUrl)
         mensagem = Mensagem.objects.filter(pk=currentUrl)
+        mensagem2 = Mensagem.objects.all()
         
-        return render_to_response('dialogo.djhtml', {'criador':criador, 'mensagem':mensagem, 'currentUrl':currentUrl})
+        return render_to_response('dialogo.djhtml', {'criador':criador, 'mensagem':mensagem, 'currentUrl':currentUrl, 'mensagem2':mensagem2})
