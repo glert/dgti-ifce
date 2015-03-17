@@ -68,7 +68,7 @@ class NovaRequisicaoView(TemplateView):
         if layout == None:
             layout = 'vertical'
        
-        return render(request, self.template_name, {'form': NovaRequisicaoForm(), 'layout': layout})
+        return render(request, self.template_name, {'form': NovaRequisicaoForm(), 'layout': layout, 'full_name': request.user.username})
     
     @method_decorator(login_required)
     def post(self, request):
@@ -113,7 +113,7 @@ def dialogo(request):
     dados = {}
     for r in requisicoes:
         dados[r] = r.getLastMessage()
-    return render_to_response('dialogo.djhtml', {'requisicoes':requisicoes})
+    return render_to_response('dialogo.djhtml', {'requisicoes':requisicoes, 'full_name': request.user.username})
 
 class RequisicaoView(TemplateView):
     template_name = 'dialogo.djhtml'
@@ -127,4 +127,4 @@ class RequisicaoView(TemplateView):
         mensagem = Mensagem.objects.filter(pk=currentUrl)
         mensagem2 = Mensagem.objects.all()
         
-        return render_to_response('dialogo.djhtml', {'criador':criador, 'mensagem':mensagem, 'currentUrl':currentUrl, 'mensagem2':mensagem2})
+        return render_to_response('dialogo.djhtml', {'criador':criador, 'mensagem':mensagem, 'currentUrl':currentUrl, 'mensagem2':mensagem2, 'full_name': request.user.username})
