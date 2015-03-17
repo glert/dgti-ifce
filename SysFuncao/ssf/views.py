@@ -120,4 +120,10 @@ class RequisicaoView(TemplateView):
     
     @method_decorator(login_required)
     def get(self, request, requisicao_id):
-        print request.items()
+        
+        currentUrl = request.get_full_path()
+        currentUrl = currentUrl[18:20]
+        criador = Requisicao.objects.filter(pk=currentUrl)
+        mensagem = Mensagem.objects.filter(pk=currentUrl)
+        
+        return render_to_response('dialogo.djhtml', {'criador':criador, 'mensagem':mensagem, 'currentUrl':currentUrl})
