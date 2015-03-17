@@ -21,7 +21,7 @@ Bem vindo(a) {{ full_name }}
 
     <div class="well">
         <h2>Solicite uma nova funcionalidade para um de nossos sistemas.</h2>
-        <--! <p>Nesta rotina é possível cadastrar as especificações de requisitos de software.</p> -->
+        <!-- <p>Nesta rotina é possível cadastrar as especificações de requisitos de software.</p> -->
         <p>Aqui é possível conversar com a DGTI sobre um sistema e propor uma nova funcionalidade para ele.</p>
         <p><a class="btn btn-primary" href="/accounts/addrequisitos/">Descrever nova Funcionalidade &raquo;</a></p>
     </div>
