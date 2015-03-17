@@ -99,35 +99,24 @@ section div {
 
 {% block content %}
 
+{{ currentUrl }}
+
   <section>
-    <div class="from-me">
-      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="right" style="font-style: italic; font-size:11px;">Time</p>
-    </div>
+
+{% for s in criador %}
   <div class="clear"></div>
     <div class="from-me">
-      <p>Check out this bubble!</p>
+      <p><h5>{{ s.criador }}:</h5>{{ mensagem }}</p><p align="right" style="font-style: italic; font-size:11px;">Time</p>
     </div>
-
+{% endfor %}
+    
 
   <div class="clear"></div>
     <div class="from-them">
       <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
     </div>
     
-    <div class="clear"></div>
-    <div class="from-them">
-      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
-    </div>
 
-  <div class="clear"></div>
-    <div class="from-me">
-      <p>Check out this bubble!</p>
-    </div>
-
-  <div class="clear"></div>
-    <div class="from-them">
-      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
-    </div>
 
   </section>
 <br>
