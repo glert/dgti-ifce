@@ -101,11 +101,12 @@ section div {
 
   <section>
     <div class="from-me">
-      <p>Hey there! What's up?</p>
+      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="right" style="font-style: italic; font-size:11px;">Time</p>
     </div>
+    
   <div class="clear"></div>
     <div class="from-them">
-      <p>Checking out iOS7 you know..</p>
+      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
     </div>
 
   </section>

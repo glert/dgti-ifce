@@ -12,7 +12,7 @@
 
               <p>{{ ultima_mensagem }}</p>
 
-            <p><a class="btn" href="http://www.djangoproject.com">Ver Detalhes &raquo;</a></p>
+            <p><a class="btn" href="/accounts/dialogo/">Ver Detalhes &raquo;</a></p>
         </div>
              
     {% endfor %}

@@ -18,7 +18,7 @@
 
             <p>{{ s.getLastMessage }}</p>
 
-            <p><a class="btn" href="http://www.djangoproject.com">View details &raquo;</a></p>
+            <p><a class="btn" href="/accounts/dialogo/">View details &raquo;</a></p>
         </div>
              
     {% endfor %}
