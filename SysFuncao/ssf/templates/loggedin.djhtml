@@ -6,11 +6,11 @@
 
 <div class="row">
 
-    {% for key, value in requisicoes.items %} 
+    {% for requisicao, ultima_mensagem in requisicoes.items %} 
     <div class="span4">
-            <h2>#{{ key }}</h2>
+            <h2>#{{ requisicao }}</h2>
 
-              <p>{{ value }}</p>
+              <p>{{ ultima_mensagem }}</p>
 
             <p><a class="btn" href="http://www.djangoproject.com">Ver Detalhes &raquo;</a></p>
         </div>
