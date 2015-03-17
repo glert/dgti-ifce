@@ -107,20 +107,6 @@ class NovaRequisicaoView(TemplateView):
                 'layout': layout,
                 }))
 
-# def consultarrequisicao(request):
-    #s = "a"
-    #s = Requisicao.objects.filter(id='')
-    #s = Requisicao.objects.get(id=1, sistema=1)
-    
-    #s = Requisicao.objects.all()
-    
-    #s = Requisicao.objects.filter(id=1)
-#     nomeSistemas = Requisicao.objects.values_list('criador', flat=True)[0:]
-#     requisicoes = Requisicao.objects.all()
-#     
-#     
-#     return render_to_response('loggedin.djhtml', {'requisicoes':requisicoes})
-
 def dialogo(request):
     requisicoes = Requisicao.objects.filter(Q(criador=request.user) |
                                             Q(interessados__in=request.user)).distinct()
@@ -128,3 +114,10 @@ def dialogo(request):
     for r in requisicoes:
         dados[r] = r.getLastMessage()
     return render_to_response('dialogo.djhtml', {'requisicoes':requisicoes})
+
+class RequisicaoView(TemplateView):
+    template_name = 'dialogo.djhtml'
+    
+    @method_decorator(login_required)
+    def get(self, request, requisicao_id):
+        print request.items()
