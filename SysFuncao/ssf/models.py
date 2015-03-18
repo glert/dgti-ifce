@@ -6,7 +6,7 @@ from django.db.models import Max
 class Sistema(models.Model):
     nome = models.CharField(max_length=64, unique=True)
     finalidade = models.TextField()
-    #responsavel = models.ForeignKey(User, blank=False, null=False)
+    responsavel = models.ForeignKey(User, blank=False, null=False)
     def __unicode__(self):
         return u"%s" % self.nome
     
@@ -24,6 +24,7 @@ class Requisicao(models.Model):
     status_tipo = models.CharField(max_length=64, choices=_STATUSES_TYPE, verbose_name='Status')
     criador = models.ForeignKey(User, related_name='criador', null=False, blank=False)  
     interessados = models.ManyToManyField(User, related_name='interessados')
+    dataHora = models.DateTimeField(null=False, blank=False)
     
     @staticmethod
     def getStatusNovo():
@@ -44,7 +45,7 @@ class Mensagem(models.Model):
     dataHora = models.DateTimeField(null=False, blank=False)
     conteudo = models.TextField(null=False, blank=False)
     usuario = models.ForeignKey(User, null=False, blank=False)    
-    requisicao_associada = models.ForeignKey(Requisicao)
+    requisicao_associada = models.ForeignKey(Requisicao, null=False, blank=False)
     
     def __unicode__(self):
         result = unicode(self.conteudo)
