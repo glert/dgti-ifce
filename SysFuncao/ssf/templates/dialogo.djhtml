@@ -8,9 +8,29 @@
     <script src="{% static 'dialogo/js/prefixfree.min.js' %}"></script>
     <script type="text/javascript">
 //<![CDATA[
+    function getClassesAndColors() {
+            result = {
+               {%for usr in usuarios_falantes %} 
+               {{usr}}: "",
+               {% endfor %} 
+            }
+            chaves = Object.keys(result);            
+            for(i=0, index = 0; i<360; i+=(360/chaves.length), index++){
+                hue = i;
+                saturation = 90 + Math.random() * 10;
+                lightness =  50 + Math.random() * 10;
+                result[chaves[index]] = "hsl("+hue+","+saturation+"%,"+lightness+"%)";
+            }
+            return result;
+    }
+     
     $(document).ready(function(){
-        divs_from_me = $('.from_me');
-          //Terminar isso bando de safados...  
+        cores = getClassesAndColors();
+        for(usuario in cores){
+            $('.'+usuario).css('background-color', cores[usuario]);
+            $('<style>.'+usuario+'::before{border-right-color:'+cores[usuario]+'}</style>').appendTo('head')
+            
+        }//Terminar isso bando de safados...  
     });
     
     
@@ -25,7 +45,7 @@
 
 {% for msg in mensagens %}
   <div class="clear"></div>
-    <div class="from-me">
+    <div class="from-me {{ msg.usuario.username }}">
       <p><h5>{{ msg.usuario }}:</h5>{{ msg.conteudo }}</p>
       <p align="right" style="font-style: italic; font-size:11px;">{{msg.dataHora}}</p>
     </div>

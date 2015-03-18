@@ -13,6 +13,7 @@ from django.db.models import Q
 from datetime import datetime
 from ssf.models import Requisicao, Mensagem, Sistema
 from ssf.forms import NovaRequisicaoForm
+from django.contrib.auth.models import User
 
 
 class LoginView(TemplateView):
@@ -123,5 +124,17 @@ class RequisicaoView(TemplateView):
         
         requisicao = Requisicao.objects.get(pk=requisicao_id)
         mensagens = requisicao.mensagem_set.all().order_by('dataHora')
-        return render(request, 'dialogo.djhtml', {'mensagens': mensagens,'requisicao':requisicao,'full_name': request.user.username})
-    
+        usuarios_pk = requisicao.mensagem_set.all().values("usuario").distinct()
+        usuarios = []
+        for pk in usuarios_pk:
+            usuarios.append(User.objects.get(pk=pk['usuario']).username)
+        
+        return render(request, 'dialogo.djhtml', 
+                      {'mensagens': mensagens,
+                       'requisicao':requisicao,
+                       'full_name': request.user.username,
+                       'usuarios_falantes' : usuarios, 
+                       })
+
+
+   
