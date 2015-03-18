@@ -6,7 +6,7 @@ from django.db.models import Max
 class Sistema(models.Model):
     nome = models.CharField(max_length=64, unique=True)
     finalidade = models.TextField()
-    Responsavel = User
+    #responsavel = models.ForeignKey(User, blank=False, null=False)
     def __unicode__(self):
         return u"%s" % self.nome
     
