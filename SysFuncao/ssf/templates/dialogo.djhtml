@@ -1,9 +1,11 @@
 {% extends "baselogin.djhtml" %}
 
 {% block extra_head %}
-    <link rel="stylesheet" type="text/css" href="dialogo/css/reset.css"/>
-    <link rel="stylesheet" type="text/css" href="dialogo/css/style.css"/>
-    <script src="dialogo/js/prefixfree.min.js"></script>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'dialogo/css/reset.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'dialogo/css/style.css' %}"/>
+    
+    <script src="{% static 'dialogo/js/prefixfree.min.js' %}"></script>
     <script type="text/javascript">
 //<![CDATA[
     $(document).ready(function(){
