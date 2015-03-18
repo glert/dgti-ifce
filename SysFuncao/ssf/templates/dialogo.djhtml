@@ -2,10 +2,8 @@
 
 {% block extra_head %}
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'dialogo/css/reset.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'dialogo/css/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'dialogo/scss/style.css' %}"/>
     
-    <script src="{% static 'dialogo/js/prefixfree.min.js' %}"></script>
     <script type="text/javascript">
 //<![CDATA[
     $(document).ready(function(){
