@@ -15,8 +15,8 @@
             chaves = Object.keys(result);            
             for(i=0, index = 0; i<360; i+=(360/chaves.length), index++){
                 hue = i;
-                saturation = 90 + Math.random() * 10;
-                lightness =  50 + Math.random() * 10;
+                saturation = 85 + Math.random() * 10;
+                lightness =  30 + Math.random() * 10;
                 result[chaves[index]] = "hsl("+hue+","+saturation+"%,"+lightness+"%)";
             }
             return result;
@@ -28,7 +28,7 @@
             $('.'+usuario).css('background-color', cores[usuario]);
             $('<style>.'+usuario+'::before{border-right-color:'+cores[usuario]+'}</style>').appendTo('head')
             
-        }//Terminar isso bando de safados...  
+        } 
     });
     
     
