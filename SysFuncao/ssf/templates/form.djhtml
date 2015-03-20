@@ -2,9 +2,11 @@
 
 {% load bootstrap_toolkit %}
 
+
 {% block extra_head %}
     {{ form.media }}
 {% endblock %}
+
 
 {% block content %}
 

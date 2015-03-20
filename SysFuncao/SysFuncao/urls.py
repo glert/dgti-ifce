@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     #url(r'^accounts/logout/$', 'ssf.views.logout'),
     url(r'^accounts/addrequisitos/$', NovaRequisicaoView.as_view()),
     url(r'^accounts/dialogo/(?P<requisicao_id>\d\d*)$', RequisicaoView.as_view()),
+    url(r'^admin/jsi18n/$', 'django.views.i18n.javascript_catalog'),
     #url(r'^form$', 'ssf.views.form'),
     # acao do botao sair
       

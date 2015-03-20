@@ -1,7 +1,6 @@
 {% extends "baselogin.djhtml" %}
 
 {% block content %}
-
 <div class="row">
 
     {% for requisicao, ultima_mensagem in requisicoes.items %} 
