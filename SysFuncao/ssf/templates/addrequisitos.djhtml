@@ -28,6 +28,7 @@
                 <a href="/accounts/loggedin/"><input class="btn" type="button" value="Cancelar" /></a>
             </p>
         {% else %}
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             <a href="/accounts/loggedin/"><input class="btn" type="button" value="Cancelar" /></a>
             <input type="submit" value="Enviar" class="btn btn-primary">
         {% endif %}
