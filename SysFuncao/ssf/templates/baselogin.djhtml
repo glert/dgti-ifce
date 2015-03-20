@@ -7,8 +7,11 @@
     <title>Sistema de Requisitos de Funções</title>
     <meta name="description" content="">
     
-    {% bootstrap_stylesheet_tag %}
-    {% bootstrap_stylesheet_tag "responsive" %}
+    {% load staticfiles %}
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'dialogo/scss/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'dialogo/scss/bootstrap-responsive.css' %}">
+
     <style type="text/css">
         body {
             padding-top: 60px;
