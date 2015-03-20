@@ -90,13 +90,6 @@ class TestForm(forms.Form):
 class NovaRequisicaoForm(forms.Form):  
     
     sistema = forms.ModelChoiceField(queryset=Sistema.objects.all())
-    interessados = forms.ModelMultipleChoiceField(queryset=User.objects.all(),                                        
-                                           widget=FilteredSelectMultiple(
-                                                     "Pessoas Interessadas",
-                                                     is_stacked=False,
-                                                     attrs={'rows':'10'},
-                                                  )
-                                          )
     mensagem = forms.CharField(
         max_length=1024,
         widget=forms.Textarea(
@@ -106,6 +99,17 @@ class NovaRequisicaoForm(forms.Form):
             }
         ),
     )
+    interessados = forms.ModelMultipleChoiceField(queryset=User.objects.all(),                                        
+                                           widget=FilteredSelectMultiple(
+                                                     "Pessoas Interessadas",
+                                                     is_stacked=False,
+                                                     attrs={'rows':'10'},
+                                                  )
+                                          )
+   
+   
     class Media:
         css = {"all":('/static/admin/css/widgets.css',),}
         js = ('/admin/jsi18n',)
+        
+    
