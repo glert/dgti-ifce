@@ -1106,8 +1106,9 @@ input[type="color"],
 input,
 textarea,
 .uneditable-input {
-  width: 206px;
+  width: 558px;
 }
+
 
 textarea {
   height: auto;
