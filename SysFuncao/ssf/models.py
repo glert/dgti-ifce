@@ -36,8 +36,11 @@ class Requisicao(models.Model):
 #             if('novo' ==  optgroup_key):
 #                 return optgroup_value 
     def getLastMessage(self):
-        maiorData = self.mensagem_set.all().aggregate(Max('dataHora'))['dataHora__max']
-        return self.mensagem_set.get(dataHora=maiorData)
+        if (self.mensagem_set.all().count()>0):
+            maiorData = self.mensagem_set.all().aggregate(Max('dataHora'))['dataHora__max']
+            return self.mensagem_set.get(dataHora=maiorData)
+        
+        return False
     
         
     def __unicode__(self): 

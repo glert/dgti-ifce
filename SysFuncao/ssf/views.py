@@ -70,7 +70,9 @@ class NovaRequisicaoView(TemplateView):
         if layout == None:
             layout = 'vertical'
        
-        return render(request, self.template_name, {'form': NovaRequisicaoForm(), 'layout': layout, 'full_name': request.user.username})
+        form = NovaRequisicaoForm()
+        
+        return render(request, self.template_name, {'form': form, 'layout': layout, 'full_name': request.user.username})
     
     @method_decorator(login_required)
     def post(self, request):

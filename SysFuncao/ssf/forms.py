@@ -99,7 +99,7 @@ class NovaRequisicaoForm(forms.Form):
             }
         ),
     )
-    interessados = forms.ModelMultipleChoiceField(queryset=User.objects.all(),                                        
+    interessados = forms.ModelMultipleChoiceField(label="", queryset=User.objects.all(),                                        
                                            widget=FilteredSelectMultiple(
                                                      "Pessoas Interessadas",
                                                      is_stacked=False,
