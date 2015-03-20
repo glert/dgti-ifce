@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Max
 from datetime import datetime
+
  
 class Sistema(models.Model):
     nome = models.CharField(max_length=64, unique=True)
@@ -23,7 +24,7 @@ class Requisicao(models.Model):
     )    
     sistema = models.ForeignKey(Sistema, null=False, blank=False)    
     status_tipo = models.CharField(max_length=64, choices=_STATUSES_TYPE, verbose_name='Status')
-    criador = models.ForeignKey(User, related_name='criador', null=False, blank=False)  
+    criador = models.ForeignKey(User, related_name='criador', null=False, blank=False,)  
     interessados = models.ManyToManyField(User, related_name='interessados')
     dataHora = models.DateTimeField(null=False, blank=False, default=datetime.now())
     

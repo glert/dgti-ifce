@@ -51,7 +51,8 @@ class LogadoView(TemplateView):
         
         requisicoes = Requisicao.objects.filter(
                                             Q(criador=request.user) |
-                                            Q(interessados__username=request.user)
+                                            Q(interessados__username=request.user) |
+                                            Q(sistema__responsavel=request.user)
         ).distinct()
         dados = {}
         for r in requisicoes:
