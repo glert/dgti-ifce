@@ -35,7 +35,7 @@
     
 //]]>
 </script>    
- 
+{{form.media}} 
 {% endblock %}
 
 {% block content %}
@@ -48,6 +48,7 @@
       <p align="right" style="font-style: italic; font-size:11px;">{{msg.dataHora}}</p>
     </div>
 {% endfor %}
+  {{ form|as_bootstrap:layout }}
     
 
   <div class="clear"></div>

@@ -15,7 +15,7 @@
 
 {% block content %}
 
-    <h1>Cadastro de Requisitos</h1>
+    <h1>Solicitação de Funcionalidade nova</h1>
     
     <p>&nbsp;</p>
         

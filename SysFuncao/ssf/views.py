@@ -134,7 +134,9 @@ class RequisicaoView(TemplateView):
                       {'mensagens': mensagens,
                        'requisicao':requisicao,
                        'full_name': request.user.username,
-                       'usuarios_falantes' : usuarios, 
+                       'usuarios_falantes' : usuarios,
+                       'form' : NovaMensagemForm(),
+                       'layout' : 'vertical'
                        })
     @method_decorator(login_required)  
     def post(self, request, requisicao_id):
