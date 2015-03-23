@@ -47,7 +47,7 @@ class Requisicao(models.Model):
         return u'%s %s %s' % (self.pk, self.sistema, self.criador)
 
 class Mensagem(models.Model):
-    dataHora = models.DateTimeField(null=False, blank=False)
+    dataHora = models.DateTimeField(null=False, blank=False, default = datetime.now())
     conteudo = models.TextField(null=False, blank=False)
     usuario = models.ForeignKey(User, null=False, blank=False)    
     requisicao_associada = models.ForeignKey(Requisicao, null=False, blank=False)

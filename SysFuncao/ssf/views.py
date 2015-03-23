@@ -12,7 +12,7 @@ from django.utils.decorators import method_decorator
 from django.db.models import Q
 from datetime import datetime
 from ssf.models import Requisicao, Mensagem, Sistema
-from ssf.forms import NovaRequisicaoForm
+from ssf.forms import NovaRequisicaoForm, NovaMensagemForm
 from django.contrib.auth.models import User
 
 
@@ -111,14 +111,6 @@ class NovaRequisicaoView(TemplateView):
                 'layout': layout,
                 }))
 
-def dialogo(request):
-    requisicoes = Requisicao.objects.filter(Q(criador=request.user) |
-                                            Q(interessados__in=request.user)).distinct()
-    dados = {}
-    for r in requisicoes:
-        dados[r] = r.getLastMessage()
-    return render_to_response('dialogo.djhtml', {'requisicoes':requisicoes, 'full_name': request.user.username})
-
 class RequisicaoView(TemplateView):
     template_name = 'dialogo.djhtml'
     
@@ -138,6 +130,13 @@ class RequisicaoView(TemplateView):
                        'full_name': request.user.username,
                        'usuarios_falantes' : usuarios, 
                        })
-
-
-   
+    @method_decorator(login_required)  #TODO tem que colocar uma permissão aqui de acordo com o usuário
+    def post(self, request, requisicao_id):
+        
+        formulario = NovaMensagemForm(request.POST)
+        requisicao = Requisicao.objects.get(pk=requisicao_id)
+        msg = Mensagem(conteudo= formulario.mensagem, usuario=request.user)
+        requisicao.mensagem_set.add(msg)
+        
+        return HttpResponseRedirect('/accounts/dialogo/%s' % requisicao_id)
+            

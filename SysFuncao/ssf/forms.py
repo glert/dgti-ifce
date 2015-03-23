@@ -90,11 +90,11 @@ class TestForm(forms.Form):
 class NovaRequisicaoForm(forms.Form):  
     
     sistema = forms.ModelChoiceField(queryset=Sistema.objects.all())
-    mensagem = forms.CharField(
+    mensagem = forms.CharField(label="Descrição",
         max_length=1024,
         widget=forms.Textarea(
             attrs={
-                'placeholder': 'escreva sua messagem',
+                'placeholder': 'Descreva a Funcionalidade',
                 'maxlength':"1024",
             }
         ),
@@ -111,5 +111,15 @@ class NovaRequisicaoForm(forms.Form):
     class Media:
         css = {"all":('/static/admin/css/widgets.css',),}
         js = ('/admin/jsi18n',)
-        
+
+class NovaMensagemForm(forms.Form):
+    mensagem = forms.CharField(
+        max_length=1024,
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': 'Escreva sua mensagem',
+                'maxlength':"1024",
+            }
+        ),
+    )      
     
