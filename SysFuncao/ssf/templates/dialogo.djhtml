@@ -87,8 +87,8 @@
 
 
   </section>
-  
-    <div class="pos_fixed"> {{ form }} <br><input type="submit" value="Enviar" class="btn btn-primary"></div>
+   <form action="/view/mensagem/" method="post">
+    <div class="pos_fixed"> {{ form }} <br><input type="submit" value="Enviar" class="btn btn-primary"></div></form>
 <br><br><br><br><br>
 
 {% endblock %}
