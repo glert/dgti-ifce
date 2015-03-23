@@ -6166,3 +6166,11 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+
+bt.pos_fixed {
+    position: fixed;
+    top: 680px;
+    left: 500px;
+
+
+}
