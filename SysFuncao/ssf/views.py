@@ -148,7 +148,9 @@ class RequisicaoView(TemplateView):
         formulario = NovaMensagemForm(request.POST)
         if formulario.is_valid():
             requisicao = Requisicao.objects.get(pk=requisicao_id)
-            msg = Mensagem(conteudo= formulario.cleaned_data['mensagem'], usuario=request.user)
+            msg = Mensagem(conteudo= formulario.cleaned_data['mensagem'],
+                            usuario=request.user,
+                            dataHora = datetime.now())
             requisicao.mensagem_set.add(msg)
             return HttpResponseRedirect('/accounts/dialogo/%s' % requisicao_id)
     

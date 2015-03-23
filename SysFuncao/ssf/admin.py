@@ -16,6 +16,11 @@ class RequisicaoAdmin(ModelAdmin):
     date_hierarchy = 'dataHora'
     filter_horizontal = ('interessados',)
 
+class MensagemAdmin(ModelAdmin):
+    list_display = ('conteudo','usuario','dataHora')
+    list_filter = ('usuario', 'requisicao_associada',)
+    date_hierarchy = 'dataHora'
+
 admin.site.register(Sistema, SistemaAdmin)
 admin.site.register(Requisicao, RequisicaoAdmin)
-admin.site.register(Mensagem)
+admin.site.register(Mensagem, MensagemAdmin)
