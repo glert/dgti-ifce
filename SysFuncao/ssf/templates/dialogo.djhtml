@@ -58,5 +58,9 @@
 
 
   </section>
+  
+  <bt class="pos_fixed"><textarea rows="2" cols="100">
+At w3schools.com you will learn how </textarea><input type="submit" value="Enviar" class="btn btn-primary"></bt>
+  
 <br>
 {% endblock %}
