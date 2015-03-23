@@ -14,6 +14,7 @@ from datetime import datetime
 from ssf.models import Requisicao, Mensagem, Sistema
 from ssf.forms import NovaRequisicaoForm, NovaMensagemForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class LoginView(TemplateView):
@@ -114,8 +115,13 @@ class NovaRequisicaoView(TemplateView):
 class RequisicaoView(TemplateView):
     template_name = 'dialogo.djhtml'
     
-    @method_decorator(login_required) #TODO tem que colocar uma permissão aqui de acordo com o usuário
+    @method_decorator(login_required) 
     def get(self, request, requisicao_id):
+        if RequisicaoView.isAllowed(request.user, requisicao_id):
+            pass
+        else:
+            return HttpResponseRedirect('/accounts/loggedin')
+        
         
         requisicao = Requisicao.objects.get(pk=requisicao_id)
         mensagens = requisicao.mensagem_set.all().order_by('dataHora')
@@ -130,8 +136,12 @@ class RequisicaoView(TemplateView):
                        'full_name': request.user.username,
                        'usuarios_falantes' : usuarios, 
                        })
-    @method_decorator(login_required)  #TODO tem que colocar uma permissão aqui de acordo com o usuário
+    @method_decorator(login_required)  
     def post(self, request, requisicao_id):
+        if RequisicaoView.isAllowed(request.user, requisicao_id):
+            pass
+        else:
+            return HttpResponseRedirect('/accounts/loggedin')
         
         formulario = NovaMensagemForm(request.POST)
         requisicao = Requisicao.objects.get(pk=requisicao_id)
@@ -139,4 +149,24 @@ class RequisicaoView(TemplateView):
         requisicao.mensagem_set.add(msg)
         
         return HttpResponseRedirect('/accounts/dialogo/%s' % requisicao_id)
+    
+    @staticmethod
+    def isAllowed(usuario, requisicao_id):
+        result = False
+        try:
+            req = Requisicao.objects.get(pk=requisicao_id)
+            if req.criador == usuario:
+                result = True            
+            elif req.sistema.responsavel == usuario: 
+                result = True
+            else:    
+                for msg in req.mensagem_set.all():
+                    if msg.usuario == usuario:
+                        result = True
+                        break
+        except ObjectDoesNotExist:
+            result = False            
+        return result
+      
+        
             
