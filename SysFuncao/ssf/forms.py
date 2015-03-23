@@ -105,8 +105,7 @@ class NovaRequisicaoForm(forms.Form):
                                                      is_stacked=False,
                                                      attrs={'rows':'10'},
                                                   )
-                                          )
-   
+                                          )  
    
     class Media:
         css = {"all":('/static/admin/css/widgets.css',),}
@@ -114,13 +113,13 @@ class NovaRequisicaoForm(forms.Form):
 
 class NovaMensagemForm(forms.Form):
         mensagem = forms.CharField(
-        max_length=1024,
-        widget=forms.Textarea(
-            attrs={
-                'placeholder': 'Escreva sua mensagem',
-                'maxlength':"1024",
-                'rows':"4",
-            }
-        ),
-    )      
+            max_length=1024,
+            widget=forms.Textarea(
+                attrs={
+                    'placeholder': 'Escreva sua mensagem',
+                    'maxlength':"1024",
+                    'rows':"4",
+                }
+            ),
+        )      
     

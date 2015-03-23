@@ -124,7 +124,7 @@ class RequisicaoView(TemplateView):
         
         
         requisicao = Requisicao.objects.get(pk=requisicao_id)
-        mensagens = requisicao.mensagem_set.all().order_by('dataHora')
+        mensagens = requisicao.mensagem_set.all().order_by('-dataHora')
         usuarios_pk = requisicao.mensagem_set.all().values("usuario").distinct()
         usuarios = []
         for pk in usuarios_pk:
@@ -146,11 +146,11 @@ class RequisicaoView(TemplateView):
             return HttpResponseRedirect('/accounts/loggedin')
         
         formulario = NovaMensagemForm(request.POST)
-        requisicao = Requisicao.objects.get(pk=requisicao_id)
-        msg = Mensagem(conteudo= formulario.mensagem, usuario=request.user)
-        requisicao.mensagem_set.add(msg)
-        
-        return HttpResponseRedirect('/accounts/dialogo/%s' % requisicao_id)
+        if formulario.is_valid():
+            requisicao = Requisicao.objects.get(pk=requisicao_id)
+            msg = Mensagem(conteudo= formulario.cleaned_data['mensagem'], usuario=request.user)
+            requisicao.mensagem_set.add(msg)
+            return HttpResponseRedirect('/accounts/dialogo/%s' % requisicao_id)
     
     @staticmethod
     def isAllowed(usuario, requisicao_id):
@@ -161,11 +161,16 @@ class RequisicaoView(TemplateView):
                 result = True            
             elif req.sistema.responsavel == usuario: 
                 result = True
-            else:    
-                for msg in req.mensagem_set.all():
-                    if msg.usuario == usuario:
+            elif result is False:
+                for u in req.interessados.all():
+                    if u == usuario:
                         result = True
-                        break
+                        break        
+#             elif result is False:    
+#                 for msg in req.mensagem_set.all():
+#                     if msg.usuario == usuario:
+#                         result = True
+#                         break
         except ObjectDoesNotExist:
             result = False            
         return result

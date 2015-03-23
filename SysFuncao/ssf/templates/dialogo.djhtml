@@ -49,46 +49,12 @@
     </div>
 {% endfor %}  
 
-  <div class="clear"></div>
-    <div class="from-them">
-      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
-    </div>
-
-
-  <div class="clear"></div>
-    <div class="from-them">
-      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
-    </div>
-
-  <div class="clear"></div>
-    <div class="from-them">
-      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
-    </div>
-
-  <div class="clear"></div>
-    <div class="from-them">
-      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
-    </div>
-
-  <div class="clear"></div>
-    <div class="from-them">
-      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
-    </div>
-
-  <div class="clear"></div>
-    <div class="from-them">
-      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
-    </div>
-
-  <div class="clear"></div>
-    <div class="from-them">
-      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
-    </div>
-
+  
 
   </section>
-   <form action="/view/mensagem/" method="post">
-    <div class="pos_fixed"> {{ form }} <br><input type="submit" value="Enviar" class="btn btn-primary"></div></form>
-<br><br><br><br><br>
+   <form method="post">{% csrf_token %}
+    <div class="pos_fixed"> {{ form }} <br/><input type="submit" value="Enviar" class="btn btn-primary">
+    </div>
+    </form>
 
 {% endblock %}
