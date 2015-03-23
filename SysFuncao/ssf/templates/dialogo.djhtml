@@ -47,9 +47,38 @@
       <p><h5>{{ msg.usuario }}:</h5>{{ msg.conteudo }}</p>
       <p align="right" style="font-style: italic; font-size:11px;">{{msg.dataHora}}</p>
     </div>
-{% endfor %}
-  {{ form|as_bootstrap:layout }}
-    
+{% endfor %}  
+
+  <div class="clear"></div>
+    <div class="from-them">
+      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
+    </div>
+
+
+  <div class="clear"></div>
+    <div class="from-them">
+      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
+    </div>
+
+  <div class="clear"></div>
+    <div class="from-them">
+      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
+    </div>
+
+  <div class="clear"></div>
+    <div class="from-them">
+      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
+    </div>
+
+  <div class="clear"></div>
+    <div class="from-them">
+      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
+    </div>
+
+  <div class="clear"></div>
+    <div class="from-them">
+      <p><h5>Person name:</h5>Hey there! What's up?</p><p align="left" style="font-style: italic; font-size:11px;">Time</p>
+    </div>
 
   <div class="clear"></div>
     <div class="from-them">
@@ -59,8 +88,6 @@
 
   </section>
   
-  <bt class="pos_fixed"><textarea rows="2" cols="100">
-At w3schools.com you will learn how </textarea><input type="submit" value="Enviar" class="btn btn-primary"></bt>
-  
-<br>
+    <div class="pos_fixed">{{ form }}</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 {% endblock %}
