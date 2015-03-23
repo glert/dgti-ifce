@@ -88,6 +88,7 @@
 
   </section>
   
-    <div class="pos_fixed">{{ form }}</div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="pos_fixed"> {{ form }} <br><input type="submit" value="Enviar" class="btn btn-primary"></div>
+<br><br><br><br><br>
+
 {% endblock %}
