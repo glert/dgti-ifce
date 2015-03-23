@@ -6167,10 +6167,13 @@ a.badge:focus {
   position: fixed;
 }
 
-bt.pos_fixed {
+div.pos_fixed {
     position: fixed;
-    top: 680px;
-    left: 500px;
-
+    /* top: 75%; */
+    /*left: 35%; */
+    
+    bottom: 15px;
+    right: 15px;
+    
 
 }
