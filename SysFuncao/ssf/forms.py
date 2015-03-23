@@ -113,12 +113,13 @@ class NovaRequisicaoForm(forms.Form):
         js = ('/admin/jsi18n',)
 
 class NovaMensagemForm(forms.Form):
-    mensagem = forms.CharField(
+        mensagem = forms.CharField(
         max_length=1024,
         widget=forms.Textarea(
             attrs={
                 'placeholder': 'Escreva sua mensagem',
                 'maxlength':"1024",
+                'rows':"4",
             }
         ),
     )      
