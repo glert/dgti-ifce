@@ -52,9 +52,18 @@
   
 
   </section>
-   <form method="post">{% csrf_token %}
-    <div class="pos_fixed"> {{ form }} <br/><input type="submit" value="Enviar" class="btn btn-primary">
-    </div>
-    </form>
+   
+<div class="chat-box">
+    <input type="checkbox" />
+    <label data-expanded="Fecha Chat" data-collapsed="Abrir Chat"></label>
+      <div class="chat-box-content">
+       <form method="post">{% csrf_token %}
+       {{ form }}
+       <input type="submit"  align="left" value="Enviar" class="btn btn-primary">
+        </form>
+       <br/>
+      </div>
+</div>
+ <br><br><br><br><br>
 
 {% endblock %}
