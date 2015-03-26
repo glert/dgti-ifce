@@ -55,7 +55,7 @@
    
 <div class="chat-box">
     <input type="checkbox" />
-    <label data-expanded="Fecha Chat" data-collapsed="Abrir Chat"></label>
+    <label data-expanded="Envie uma Mensagem" data-collapsed="Fechar Edição"></label>
       <div class="chat-box-content">
        <form method="post">{% csrf_token %}
        {{ form }}
