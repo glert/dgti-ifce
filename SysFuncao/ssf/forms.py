@@ -7,9 +7,6 @@ from django.contrib.auth.models import User
 from django.contrib.admin.widgets import FilteredSelectMultiple
 
 
-
-
-        return cleane
 class NovaRequisicaoForm(forms.Form):  
     
     sistema = forms.ModelChoiceField(queryset=Sistema.objects.all())
