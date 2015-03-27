@@ -3,6 +3,15 @@
 {% block extra_head %}
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'dialogo/scss/style.css' %}"/>
+ 
+<!-- forma que achei para ajustar o textare, para o dialogo, sobrescrevendo o tamanho original do css -->
+<style>
+input,
+textarea,
+.uneditable-input {
+  width: 367px;
+}
+</style>
     
     <script type="text/javascript">
 //<![CDATA[
