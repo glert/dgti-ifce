@@ -3,6 +3,15 @@
 {% block extra_head %}
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'dialogo/scss/style.css' %}"/>
+ 
+<!-- forma que achei para ajustar o textare, para o dialogo, sobrescrevendo o tamanho original do css -->
+<style>
+input,
+textarea,
+.uneditable-input {
+  width: 367px;
+}
+</style>
     
     <script type="text/javascript">
 //<![CDATA[
@@ -53,9 +62,9 @@
 
   </section>
    
-<div class="chat-box">
+<div class="chat-box" style="width:588px;">
     <input type="checkbox" />
-    <label data-expanded="Envie uma Mensagem" data-collapsed="Fechar Edição"></label>
+    <label data-expanded="Fechar Edição" data-collapsed="Envie uma Mensagem"></label>
       <div class="chat-box-content">
        <form method="post">{% csrf_token %}
        {{ form }}
