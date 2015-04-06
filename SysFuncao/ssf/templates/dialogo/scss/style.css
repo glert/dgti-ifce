@@ -1,12 +1,14 @@
 
 section {
-  max-width: 450px;
+  max-width: 100%;
+  text-align:center
   margin: 50px auto;
 }
 section div {
-  max-width: 255px;
+  max-width: 70%;
   word-wrap: break-word;
   margin-bottom: 20px;
+  margin-right: 254px;
   line-height: 24px;
 }
 

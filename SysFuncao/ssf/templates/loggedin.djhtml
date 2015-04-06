@@ -18,7 +18,7 @@
 <div class="row">
 
     {% for requisicao, ultima_mensagem in requisicoes.items %} 
-    <div title="Requisição em andamento" class="span4 req-box">
+    <div title="Requisição em andamento" class="span4 well">
             <h3>#{{ requisicao }}</h3>
 
             <p>{{ ultima_mensagem }}</p>

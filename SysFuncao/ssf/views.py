@@ -6,12 +6,12 @@ from django.core.context_processors import csrf
 from django.core.mail import send_mail
 
 from django.template import RequestContext
-
+from django.utils import timezone
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.db.models import Q
-from datetime import datetime
+
 from ssf.models import Requisicao, Mensagem, Sistema
 from ssf.forms import NovaRequisicaoForm, NovaMensagemForm
 from django.contrib.auth.models import User
@@ -101,7 +101,7 @@ class NovaRequisicaoView(TemplateView):
             msgInicial.usuario = request.user
             msgInicial.requisicao_associada = novaReq
             msgInicial.conteudo = msg_form
-            msgInicial.dataHora = datetime.now()
+            msgInicial.dataHora = timezone.now()
             
            
             msgInicial.save()
@@ -151,12 +151,13 @@ class RequisicaoView(TemplateView):
             requisicao = Requisicao.objects.get(pk=requisicao_id)
             msg = Mensagem(conteudo= formulario.cleaned_data['mensagem'],
                             usuario=request.user,
-                            dataHora = datetime.now())
+                            dataHora = timezone.now())
             requisicao.mensagem_set.add(msg)
-            
+            assunto = u"Requisições no sistema: %s" % requisicao.sistema.nome
+            corpoEmail =  "\"%s\" de %s" % (msg.conteudo, request.user,)
             send_mail(
-                      ("Requisições no sistema: %s" % requisicao.sistema.nome), 
-                      ("\"%s\" de %s" % msg, request.user),
+                      assunto, 
+                      corpoEmail,
                        "no_reply@dgti.ifce.edu.br",
                        [], 
                        fail_silently=False,
@@ -204,9 +205,10 @@ class MessageMailProcessor():
     def process(self):
         if Sistema.objects.filter(responsavel=self._mensagem.usuario) and self._mensagem.requisicao_associada.status_tipo != u'Análise de viabilidade':
             destinatarios = []
-            for users in self._mensagem.requisicao_associada.interessados.all():
-                destinatarios.append("%s" % users.email)
-            assunto = "[%s]Solicitação de Funcionalidade"
+            for u in self._mensagem.requisicao_associada.interessados.all():
+                if(u.email):
+                    destinatarios.append("%s" % u.email)
+            assunto = "[%s]Solicitação de Funcionalidade" % self._mensagem.sistema
             send_mail(assunto, self._mensagem.conteudo,  "noreply@ifce.edu.br", destinatarios, fail_silently=False)
             
             
