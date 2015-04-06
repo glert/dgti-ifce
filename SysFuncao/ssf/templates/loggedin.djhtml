@@ -10,6 +10,82 @@
         border-width: 1px;
     }
     
+.novo{
+font:bold 15px Tahoma, Geneva, sans-serif;
+font-style:normal;
+color:#ffffff;
+background:#15db8e;
+border:0px solid #ffffff;
+border-radius:10px 10px 10px 10px;
+-moz-border-radius:10px 10px 10px 10px;
+-webkit-border-radius:10px 10px 10px 10px;
+width:45px;
+padding:1px 11px;
+cursor:pointer;
+margin:0 auto;
+position:relative;
+top: 15%;
+left: -38%;
+  
+}
+  
+.viavel{
+font:bold 15px Tahoma, Geneva, sans-serif;
+font-style:normal;
+color:#ffffff;
+background:#157bdb;
+border:0px solid #ffffff;
+border-radius:10px 10px 10px 10px;
+-moz-border-radius:10px 10px 10px 10px;
+-webkit-border-radius:10px 10px 10px 10px;
+width:45px;
+padding:1px 11px;
+cursor:pointer;
+margin:0 auto;
+position:relative;
+top: 15%;
+left: -38%;
+  
+}
+  
+.rejeitado{
+font:bold 15px Tahoma, Geneva, sans-serif;
+font-style:normal;
+color:#ffffff;
+background:#db3b15;
+border:0px solid #ffffff;
+border-radius:10px 10px 10px 10px;
+-moz-border-radius:10px 10px 10px 10px;
+-webkit-border-radius:10px 10px 10px 10px;
+width:45px;
+padding:1px 11px;
+cursor:pointer;
+margin:0 auto;
+position:relative;
+top: 15%;
+left: -38%;
+  
+}
+
+.simplementacao{
+font:bold 15px Tahoma, Geneva, sans-serif;
+font-style:normal;
+color:#ffffff;
+background:#dbae15;
+border:0px solid #ffffff;
+border-radius:10px 10px 10px 10px;
+-moz-border-radius:10px 10px 10px 10px;
+-webkit-border-radius:10px 10px 10px 10px;
+width:45px;
+padding:1px 11px;
+cursor:pointer;
+margin:0 auto;
+position:relative;
+top: 15%;
+left: -38%;
+  
+}
+    
 </style>
 
 {% endblock %}
@@ -19,7 +95,7 @@
 
     {% for requisicao, ultima_mensagem in requisicoes.items %} 
     <div title="Requisição em andamento" class="span4 well">
-            <h3>#{{ requisicao }}</h3>
+            <h3>#{{ requisicao }}<div class="{{ requisicao.status_tipo }}">{{ requisicao.status_tipo }}</div></h3>
 
             <p>{{ ultima_mensagem }}</p>
 
