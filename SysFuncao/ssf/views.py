@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
+from django.core.mail import send_mail
 
 from django.template import RequestContext
 
@@ -152,6 +153,15 @@ class RequisicaoView(TemplateView):
                             usuario=request.user,
                             dataHora = datetime.now())
             requisicao.mensagem_set.add(msg)
+            
+            send_mail(
+                      ("Requisições no sistema: %s" % requisicao.sistema.nome), 
+                      ("\"%s\" de %s" % msg, request.user),
+                       "no_reply@dgti.ifce.edu.br",
+                       [], 
+                       fail_silently=False,
+                    )
+            
             return HttpResponseRedirect('/accounts/dialogo/%s' % requisicao_id)
     
     @staticmethod
@@ -168,7 +178,7 @@ class RequisicaoView(TemplateView):
                     if u == usuario:
                         result = True
                         break        
-#             elif result is False:    
+#             elif result is False:    # Descomente isso caso haja mensageiros que deixaram de ser interessados
 #                 for msg in req.mensagem_set.all():
 #                     if msg.usuario == usuario:
 #                         result = True
@@ -176,6 +186,33 @@ class RequisicaoView(TemplateView):
         except ObjectDoesNotExist:
             result = False            
         return result
+    @staticmethod
+    def holdsResponsability(usuario, requisicao_id):
+        result = False
+        try:
+            req = Requisicao.objects.get(pk=requisicao_id)
+            if req.sistema.responsavel == usuario: 
+                result = True
+            
+        except ObjectDoesNotExist:
+            result = False            
+        return result
       
-        
+class MessageMailProcessor():
+    def __init__(self, mensagem):
+        self._mensagem = mensagem
+    def process(self):
+        if Sistema.objects.filter(responsavel=self._mensagem.usuario) and self._mensagem.requisicao_associada.status_tipo != u'Análise de viabilidade':
+            destinatarios = []
+            for users in self._mensagem.requisicao_associada.interessados.all():
+                destinatarios.append("%s" % users.email)
+            assunto = "[%s]Solicitação de Funcionalidade"
+            send_mail(assunto, self._mensagem.conteudo,  "noreply@ifce.edu.br", destinatarios, fail_silently=False)
+            
+            
+            
+               
+    
+  
+            
             

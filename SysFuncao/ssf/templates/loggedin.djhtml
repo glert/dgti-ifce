@@ -1,16 +1,30 @@
 {% extends "baselogin.djhtml" %}
 
+{% block extra_head %}
+<style type="text/css">
+    .req-box{
+        
+    }
+    .req-box:hover{
+        border-style:solid;
+        border-width: 1px;
+    }
+    
+</style>
+
+{% endblock %}
+
 {% block content %}
 <div class="row">
 
     {% for requisicao, ultima_mensagem in requisicoes.items %} 
-    <div class="span4">
+    <div title="Requisição em andamento" class="span4 req-box">
             <h3>#{{ requisicao }}</h3>
 
-              <p>{{ ultima_mensagem }}</p>
+            <p>{{ ultima_mensagem }}</p>
 
             <p><a class="btn" href="/accounts/dialogo/{{ requisicao.pk }}">Ver Detalhes &raquo;</a></p>
-        </div>
+    </div>
              
     {% endfor %}
     

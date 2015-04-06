@@ -62,7 +62,7 @@ textarea,
 
   </section>
    
-<div class="chat-box" style="width:588px;">
+<div class="chat-box" >
     <input type="checkbox" />
     <label data-expanded="Fechar Edição" data-collapsed="Envie uma Mensagem"></label>
       <div class="chat-box-content">

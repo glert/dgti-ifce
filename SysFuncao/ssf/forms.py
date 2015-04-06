@@ -33,13 +33,16 @@ class NovaRequisicaoForm(forms.Form):
 
 class NovaMensagemForm(forms.Form):
         mensagem = forms.CharField(
-            max_length=1024,
+            max_length=2048,
             widget=forms.Textarea(
                 attrs={
                     'placeholder': 'Escreva sua mensagem',
-                    'maxlength':"1024",
+                    'maxlength':"2048",
                     'rows':"4",
                 }
             ),
-        )      
+        )
+class DocumentoReqForm(forms.Form):
+    documento = forms.FileField()
+          
     
