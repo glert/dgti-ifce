@@ -67,8 +67,8 @@ textarea,
     <label data-expanded="Fechar Edição" data-collapsed="Envie uma Mensagem"></label>
       <div class="chat-box-content">
        <form method="post">{% csrf_token %}
-       {{ form }}
-       <input type="submit"  align="left" value="Enviar" class="btn btn-primary">
+       {{ form}}
+       <input type="submit"  style="float:right;" value="Enviar" class="btn btn-primary">
         </form>
        <br/>
       </div>

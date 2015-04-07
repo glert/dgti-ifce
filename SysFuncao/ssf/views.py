@@ -18,6 +18,7 @@ from ssf.models import Requisicao, Mensagem, Sistema
 from ssf.forms import NovaRequisicaoForm, NovaMensagemForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django import forms
 
 
 class LoginView(TemplateView):
@@ -41,12 +42,7 @@ class LoginView(TemplateView):
             else:
                 self.error = "Seu acesso ao sistema foi bloqueado, consulte o administrador"
                 return render(request, self.template_name, {'error':self.error})
-        else:
-            email = EmailMessage('Titulo', 'Corpo', to=['ejailes@hotmail.com'])
-            email.send()
-            self.error = "Nome de usuário e/ou senha incorretos"
-            return render(request, self.template_name,{'error':self.error})
-            
+        
           
         
 class LogadoView(TemplateView):
@@ -135,13 +131,16 @@ class RequisicaoView(TemplateView):
         usuarios = []
         for pk in usuarios_pk:
             usuarios.append(User.objects.get(pk=pk['usuario']).username)
-        
+        formEntrada = NovaMensagemForm()
+        if request.user != requisicao.sistema.responsavel:
+            formEntrada.fields['booleanEmail'].widget = forms.HiddenInput()
+            formEntrada.fields['booleanEmail'].initial ="Não"
         return render(request, 'dialogo.djhtml', 
                       {'mensagens': mensagens,
                        'requisicao':requisicao,
                        'full_name': request.user.username,
                        'usuarios_falantes' : usuarios,
-                       'form' : NovaMensagemForm(),
+                       'form' : formEntrada,
                        'layout' : 'vertical'
                        })
     @method_decorator(login_required)  
@@ -158,18 +157,27 @@ class RequisicaoView(TemplateView):
                             usuario=request.user,
                             dataHora = timezone.now())
             requisicao.mensagem_set.add(msg)
-            assunto = u"Requisições no sistema: %s" % requisicao.sistema.nome
-            corpoEmail =  "\"%s\" de %s" % (msg.conteudo, request.user,)
-            send_mail(
-                      assunto, 
-                      corpoEmail,
-                       "no_reply@dgti.ifce.edu.br",
-                       [], 
-                       fail_silently=False,
-                    )
             
+            if request.user == requisicao.sistema.responsavel and formulario.cleaned_data['booleanEmail']:                
+                assunto = u"Requisições no sistema: %s" % requisicao.sistema.nome
+                corpoEmail =  "\"%s\" de %s" % (msg.conteudo, request.user,)
+                destinatarios = []
+                for u in requisicao.interessados.all():
+                    if u.email:
+                        destinatarios.append(u.email);
+                
+                if requisicao.criador.email and requisicao.criador.email not in destinatarios:
+                    destinatarios.append(requisicao.criador.email)
+                
+#                 if requisicao.sistema.responsavel.email and requisicao.sistema.responsavel.email not in destinatarios:
+#                     destinatarios.append(requisicao.sistema.responsavel.email) 
+#Se descomentar seria como se o responsável enviasse um email para si mesmo. 
+                        
+                lembrete  = EmailMessage(subject=assunto, body=corpoEmail, to=destinatarios)
+                lembrete.send(fail_silently=False)
+                                
             return HttpResponseRedirect('/accounts/dialogo/%s' % requisicao_id)
-    
+        
     @staticmethod
     def isAllowed(usuario, requisicao_id):
         result = False
@@ -192,34 +200,4 @@ class RequisicaoView(TemplateView):
         except ObjectDoesNotExist:
             result = False            
         return result
-    @staticmethod
-    def holdsResponsability(usuario, requisicao_id):
-        result = False
-        try:
-            req = Requisicao.objects.get(pk=requisicao_id)
-            if req.sistema.responsavel == usuario: 
-                result = True
-            
-        except ObjectDoesNotExist:
-            result = False            
-        return result
-      
-class MessageMailProcessor():
-    def __init__(self, mensagem):
-        self._mensagem = mensagem
-    def process(self):
-        if Sistema.objects.filter(responsavel=self._mensagem.usuario) and self._mensagem.requisicao_associada.status_tipo != u'Análise de viabilidade':
-            destinatarios = []
-            for u in self._mensagem.requisicao_associada.interessados.all():
-                if(u.email):
-                    destinatarios.append("%s" % u.email)
-            assunto = "[%s]Solicitação de Funcionalidade" % self._mensagem.sistema
-            send_mail(assunto, self._mensagem.conteudo,  "noreply@ifce.edu.br", destinatarios, fail_silently=False)
-            
-            
-            
-               
     
-  
-            
-            
