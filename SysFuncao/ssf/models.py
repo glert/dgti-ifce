@@ -54,8 +54,8 @@ class Mensagem(models.Model):
     
     def __unicode__(self):
         result = unicode(self.conteudo)
-        if len(result) >= 20:
-            result = u'%s...' % result[:18]            
+        if len(result) >= 40:
+            result = u'%s...' % result[:38]            
         return result 
           
     

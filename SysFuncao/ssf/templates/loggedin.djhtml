@@ -3,11 +3,10 @@
 {% block extra_head %}
 <style type="text/css">
     .req-box{
-        
+        -webkit-transform: rotate(0deg)
     }
     .req-box:hover{
-        border-style:solid;
-        border-width: 1px;
+        -webkit-transform: rotate(-1deg)
     }
     
 .novo{
@@ -19,17 +18,10 @@ border:0px solid #ffffff;
 border-radius:10px 10px 10px 10px;
 -moz-border-radius:10px 10px 10px 10px;
 -webkit-border-radius:10px 10px 10px 10px;
-width:45px;
+display: inline;
 padding:1px 11px;
-cursor:pointer;
-margin:0 auto;
-position:relative;
-top: 15%;
-left: -38%;
-  
 }
-  
-.viavel{
+.analiseViabilidade{
 font:bold 15px Tahoma, Geneva, sans-serif;
 font-style:normal;
 color:#ffffff;
@@ -38,36 +30,22 @@ border:0px solid #ffffff;
 border-radius:10px 10px 10px 10px;
 -moz-border-radius:10px 10px 10px 10px;
 -webkit-border-radius:10px 10px 10px 10px;
-width:45px;
+display: inline;
 padding:1px 11px;
-cursor:pointer;
-margin:0 auto;
-position:relative;
-top: 15%;
-left: -38%;
-  
 }
-  
 .rejeitado{
 font:bold 15px Tahoma, Geneva, sans-serif;
 font-style:normal;
 color:#ffffff;
-background:#db3b15;
+background:#db3b15;;
 border:0px solid #ffffff;
 border-radius:10px 10px 10px 10px;
 -moz-border-radius:10px 10px 10px 10px;
 -webkit-border-radius:10px 10px 10px 10px;
-width:45px;
+display: inline;
 padding:1px 11px;
-cursor:pointer;
-margin:0 auto;
-position:relative;
-top: 15%;
-left: -38%;
-  
 }
-
-.simplementacao{
+.emEspera{
 font:bold 15px Tahoma, Geneva, sans-serif;
 font-style:normal;
 color:#ffffff;
@@ -76,16 +54,10 @@ border:0px solid #ffffff;
 border-radius:10px 10px 10px 10px;
 -moz-border-radius:10px 10px 10px 10px;
 -webkit-border-radius:10px 10px 10px 10px;
-width:45px;
+display: inline;
 padding:1px 11px;
-cursor:pointer;
-margin:0 auto;
-position:relative;
-top: 15%;
-left: -38%;
-  
 }
-    
+
 </style>
 
 {% endblock %}
@@ -94,14 +66,81 @@ left: -38%;
 <div class="row">
 
     {% for requisicao, ultima_mensagem in requisicoes.items %} 
-    <div title="Requisição em andamento" class="span4 well">
-            <h3>#{{ requisicao }}<div class="{{ requisicao.status_tipo }}">{{ requisicao.status_tipo }}</div></h3>
-
-            <p>{{ ultima_mensagem }}</p>
-
-            <p><a class="btn" href="/accounts/dialogo/{{ requisicao.pk }}">Ver Detalhes &raquo;</a></p>
-    </div>
-             
+        {% if requisicao.status_tipo == "novo" %}
+            <div title="Fazendo um pedido de nova funcionalidade." class="span4 well req-box">
+                    <div style="float:right; ">
+                        <span class="novo">Em Fase de Elaboração</span>
+                        
+                    </div>
+                    
+                    <div style="font-size:21px;margin-bottom:8px;">Pedido #{{ requisicao.id }}
+                        <br/> no sistema 
+                        <span style="font-weight:bold;">{{ requisicao.sistema }}</span>, por {{ requisicao.criador | capfirst}}
+                    </div>
+        
+                    <p>{{ ultima_mensagem }}</p>
+        
+                    <p><a style="float:right;" class="btn" href="/accounts/dialogo/{{ requisicao.pk }}">Acompanhar &raquo;</a></p>
+            </div>
+        {% else %}{% if requisicao.status_tipo == "analise de viabilidade" %}
+            <div title="A requisição de nova funcionaliade ainda está sendo analisada." class="span4 well req-box">
+                    <div style="float:right; "><span class="analiseViabilidade">Aguarde Provimento</span></div>
+                    <div style="font-size:21px;margin-bottom:8px;">Pedido #{{ requisicao.id }}
+                        <br/> no sistema 
+                        <span style="font-weight:bold;">{{ requisicao.sistema }}</span>, por {{ requisicao.criador | capfirst }}
+                    </div>
+                    <p>{{ ultima_mensagem }}</p>
+        
+                    <p><a style="float:right;" class="btn" href="/accounts/dialogo/{{ requisicao.pk }}">Ver discussão &raquo;</a></p>
+            </div>
+        {% else %}{% if requisicao.status_tipo == "viavel" %}
+            <div title="A funcionalidade foi considerada viável e poderá ser implementada dentro da disponibilidade."
+             class="span4 well req-box">
+                    <div style="float:right; "><span class="emEspera">Aprovado - Lista de Espera</span></div>
+                    <div style="font-size:21px;margin-bottom:8px;">Pedido #{{ requisicao.id }}
+                        <br/> no sistema 
+                        <span style="font-weight:bold;">{{ requisicao.sistema }}</span>, por {{ requisicao.criador | capfirst }}
+                    </div>
+                    <p>{{ ultima_mensagem }}</p>
+        
+                    <p><a style="float:right;" class="btn" href="/accounts/dialogo/{{ requisicao.pk }}">Ver discussão &raquo;</a></p>
+            </div>
+        {% else %}{% if requisicao.status_tipo == "em implementacao" %}
+            <div title="Os programadores estão implementando a funcionalidade requerida." class="span4 well req-box">
+                    <div style="float:right; "><span class="novo">Em Desenvolvimento</span></div>
+                    <div style="font-size:21px;margin-bottom:8px;">Pedido #{{ requisicao.id }}
+                        <br/> no sistema 
+                        <span style="font-weight:bold;">{{ requisicao.sistema }}</span>, por {{ requisicao.criador | capfirst }}
+                    </div>
+                    <p>{{ ultima_mensagem }}</p>
+        
+                    <p><a style="float:right;" class="btn" href="/accounts/dialogo/{{ requisicao.pk }}">Acompanhar &raquo;</a></p>
+            </div>
+        {% else %}{% if requisicao.status_tipo == "rejeitado" %}
+            <div title="A funcionalidade solicitada é inviável e a solicitação foi rejeitada." class="span4 well req-box">
+                    <div style="float:right;"><span class="rejeitado">Rejeitada</span></div>
+                    <div style="font-size:21px;margin-bottom:8px;">Pedido #{{ requisicao.id }}
+                        <br/> no sistema 
+                        <span style="font-weight:bold;">{{ requisicao.sistema }}</span>, por {{ requisicao.criador | capfirst }}
+                    </div>
+                    <p>{{ ultima_mensagem }}</p>
+        
+                    <p><a style="float:right;" class="btn" href="/accounts/dialogo/{{ requisicao.pk }}">Ver discussão &raquo;</a></p>
+            </div>
+        {% else %}{% if requisicao.status_tipo == "finalizado" %}
+            <div title="A funcionalidade já está operacional." class="span4 well req-box">
+                   <div style="float:right;"><span class="analiseViabilidade">Implementada</span></div>
+                   <div style="font-size:21px;margin-bottom:8px;">Pedido #{{ requisicao.id }}
+                        <br/> no sistema 
+                        <span style="font-weight:bold;">{{ requisicao.sistema }}</span>, por {{ requisicao.criador | capfirst }}
+                    </div> 
+                    <p>{{ ultima_mensagem }}</p>
+        
+                    <p><a style="float:right;" class="btn" href="/accounts/dialogo/{{ requisicao.pk }}">Ver discussão &raquo;</a></p>
+            </div>
+        {% endif %}{% endif %}{% endif %}{% endif %}{% endif %}{% endif%}
+        
+               
     {% endfor %}
     
 </div>
