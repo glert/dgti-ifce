@@ -5,6 +5,8 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from django.core.mail import send_mail
 
+from django.core.mail import EmailMessage
+
 from django.template import RequestContext
 from django.utils import timezone
 from django.views.generic import TemplateView
@@ -40,6 +42,8 @@ class LoginView(TemplateView):
                 self.error = "Seu acesso ao sistema foi bloqueado, consulte o administrador"
                 return render(request, self.template_name, {'error':self.error})
         else:
+            email = EmailMessage('Titulo', 'Corpo', to=['ejailes@hotmail.com'])
+            email.send()
             self.error = "Nome de usuário e/ou senha incorretos"
             return render(request, self.template_name,{'error':self.error})
             
