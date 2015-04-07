@@ -15,6 +15,13 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+#Configuração do SEND EMAIL GMAIL
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ejailesb@gmail.com'
+EMAIL_HOST_PASSWORD = '12345678django'
+EMAIL_PORT = 587
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
