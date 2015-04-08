@@ -42,7 +42,9 @@ class LoginView(TemplateView):
             else:
                 self.error = "Seu acesso ao sistema foi bloqueado, consulte o administrador"
                 return render(request, self.template_name, {'error':self.error})
-        
+        else:
+            self.error = "Nome de usuário e/ou senha inválidos."
+            return render(request, self.template_name, {'error':self.error})
           
         
 class LogadoView(TemplateView):
@@ -177,6 +179,8 @@ class RequisicaoView(TemplateView):
                 lembrete.send(fail_silently=False)
                                 
             return HttpResponseRedirect('/accounts/dialogo/%s' % requisicao_id)
+        else:
+            print formulario
         
     @staticmethod
     def isAllowed(usuario, requisicao_id):

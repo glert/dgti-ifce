@@ -10,7 +10,7 @@ class SistemaAdmin(ModelAdmin):
 
 class RequisicaoAdmin(ModelAdmin):
     fields = ('criador','status_tipo','sistema','dataHora', 'interessados',)
-    list_display = ("status_tipo","criador", 'sistema','dataHora')
+    list_display = ('sistema',"status_tipo","criador",'dataHora')
     
     list_filter = ('status_tipo','sistema',)
     date_hierarchy = 'dataHora'

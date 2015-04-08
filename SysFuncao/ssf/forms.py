@@ -30,7 +30,7 @@ class NovaRequisicaoForm(forms.Form):
    
     class Media:
         css = {"all":('/static/admin/css/widgets.css',),}
-        js = ('/admin/jsi18n',)
+        js = ('/dgti/jsi18n',)
 
 class NovaMensagemForm(forms.Form):
         BOOL_CHOICES = ((True, 'Sim'), (False, 'Não'))
@@ -44,7 +44,7 @@ class NovaMensagemForm(forms.Form):
                 }
             ),
         )
-        booleanEmail = forms.BooleanField(required=True, label="Enviar um email lembrete a todos:", 
+        booleanEmail = forms.BooleanField(required=False, initial=False, label="Enviar um email lembrete a todos:", 
                                            widget=RadioSelect(choices=[(True, 'Sim'),(False, 'Não')]))
 class DocumentoReqForm(forms.Form):
     documento = forms.FileField()
